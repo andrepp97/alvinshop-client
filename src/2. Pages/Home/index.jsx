@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { MDBIcon } from 'mdbreact';
+import { MDBAnimation, MDBIcon } from 'mdbreact';
 import Logo from '../../3. Assets/img/example.png';
+import './home.css';
 
 class HomePage extends Component {
     render() {
@@ -9,12 +10,18 @@ class HomePage extends Component {
             <div id="page-wrapper">
                 <div className="container h-100">
 
-                    <h2 className="mb-5">HALO DUNIA</h2>
+                    <h2 className="text-center animation fadeInDown h2-responsive pt-3" style={{ letterSpacing: '2px' }}>
+                        WELCOME TO GAMING REVOLUTION
+                    </h2>
 
-                    <div className="row">
+                    <MDBAnimation type="fadeIn" delay=".5s" className="container">
+                        <hr className="my-5" />
+                    </MDBAnimation>
 
-                        <div className="col-md-4 d-flex align-items-center justify-content-center">
-                            <Link to="/aksesoris-pc" className="card w-responsive hoverable">
+                    <MDBAnimation type="fadeIn" className="row py-3">
+
+                        <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
+                            <Link to="/aksesoris-pc" className="card w-responsive hover-up">
                                 <div className="card-body text-center">
                                     <MDBIcon icon="desktop" size="4x" className="red-text" />
                                 </div>
@@ -22,14 +29,14 @@ class HomePage extends Component {
                                     Aksesoris PC
                                 </div>
                             </Link>
-                        </div>
+                        </MDBAnimation>
 
-                        <div id="logo-home" className="col-md-4">
+                        <div id="logo-home" className="col-md-4" style={{ zIndex:999 }}>
                             <img src={Logo} className="img-thumbnail img-fluid rounded-circle shadow" alt=""/>
                         </div>
 
-                        <div className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
-                            <Link to="/playstation" className="card w-responsive hoverable">
+                        <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
+                            <Link to="/playstation" className="card w-responsive hover-up">
                                 <div className="card-body text-center">
                                     <MDBIcon fab icon="playstation" size="4x" className="indigo-text" />
                                 </div>
@@ -37,9 +44,9 @@ class HomePage extends Component {
                                     Playstation
                                 </div>
                             </Link>
-                        </div>
+                        </MDBAnimation>
 
-                    </div>
+                    </MDBAnimation>
 
                 </div>
             </div>

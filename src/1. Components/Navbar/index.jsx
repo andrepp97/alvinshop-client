@@ -6,6 +6,9 @@ import {
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 
+// COMPONENTS
+import SearchModal from './components/SearchModal';
+
 // LOGO
 import Logo from '../../3. Assets/img/example.png';
 
@@ -18,7 +21,11 @@ class Navbar extends Component {
 
     // FUNCTIONS //
     toggleCollapse = () => {
-        this.setState({ isOpen: !this.state.isOpen });
+        this.setState({ isOpen: !this.state.isOpen })
+    }
+
+    toggleSearch = () => {
+        this.setState({ searchOpen: !this.state.searchOpen })
     }
 
     onUserLogout = () => {
@@ -31,10 +38,10 @@ class Navbar extends Component {
     render() {
         return (
             <MDBNavbar
-                light
+                dark
                 fixed="top"
                 expand="lg"
-                color="white"
+                color="unique-color-dark"
                 className="py-1"
             >
                 <div className="container">
@@ -49,18 +56,22 @@ class Navbar extends Component {
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                         <MDBNavbarNav right>
 
-                            {/* SEARCH BAR */}
+                            {/* SEARCH BUTTON */}
                             <MDBNavItem>
-                                <MDBBtn color="brown" className="px-3 py-1">
+                                <MDBBtn color='mdb-color' className="px-3 py-1" onClick={this.toggleSearch}>
                                     <MDBIcon icon="search" />
                                 </MDBBtn>
                             </MDBNavItem>
-                            {/* SEARCH BAR */}
+                            {/* SEARCH BUTTON */}
+
+                            {/* SEARCH MODAL */}
+                            <SearchModal isOpen={this.state.searchOpen} toggleSearch={this.toggleSearch} />
+                            {/* SEARCH MODAL */}
 
                             {
                                 !this.props.username
                                 ?
-                                    <MDBBtn color='brown' className='px-3 py-1'>
+                                    <MDBBtn color='mdb-color' className='px-3 py-1'>
                                         Login / Signup
                                     </MDBBtn>
                                 :

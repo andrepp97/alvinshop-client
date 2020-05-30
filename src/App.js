@@ -6,6 +6,7 @@ import Navbar from './1. Components/Navbar';
 
 // PAGES
 import Home from './2. Pages/Home';
+import Signup from './2. Pages/Auth/Signup';
 import NotFound from './2. Pages/404';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
         
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/signup' exact component={Signup} />
           <Route path='*' component={NotFound} />
         </Switch>
 

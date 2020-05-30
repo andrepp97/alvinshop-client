@@ -8,6 +8,7 @@ import {
 
 // COMPONENTS
 import SearchModal from './components/SearchModal';
+import AuthModal from './components/AuthModal';
 
 // LOGO
 import Logo from '../../3. Assets/img/example.png';
@@ -26,6 +27,10 @@ class Navbar extends Component {
 
     toggleSearch = () => {
         this.setState({ searchOpen: !this.state.searchOpen })
+    }
+
+    toggleAuth = () => {
+        this.setState({ authOpen: !this.state.authOpen })
     }
 
     onUserLogout = () => {
@@ -66,12 +71,13 @@ class Navbar extends Component {
 
                             {/* SEARCH MODAL */}
                             <SearchModal isOpen={this.state.searchOpen} toggleSearch={this.toggleSearch} />
+                            <AuthModal isOpen={this.state.authOpen} toggleAuth={this.toggleAuth} />
                             {/* SEARCH MODAL */}
 
                             {
                                 !this.props.username
                                 ?
-                                    <MDBBtn color='mdb-color' className='px-3 py-1'>
+                                    <MDBBtn color='mdb-color' className='px-3 py-1' onClick={this.toggleAuth}>
                                         Login / Signup
                                     </MDBBtn>
                                 :

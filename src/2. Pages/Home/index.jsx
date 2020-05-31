@@ -5,6 +5,11 @@ import Logo from '../../3. Assets/img/example.png';
 import './home.css';
 
 class HomePage extends Component {
+    state = {
+
+    }
+
+    // MAIN RENDER
     render() {
         return (
             <div id="page-wrapper">
@@ -21,7 +26,7 @@ class HomePage extends Component {
                     <MDBAnimation type="fadeIn" className="row py-3">
 
                         <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
-                            <Link to="/aksesoris-pc" className="card w-responsive hover-up">
+                            <Link to="/catalog?q=pc" className="card w-responsive hover-up">
                                 <div className="card-body text-center">
                                     <MDBIcon icon="desktop" size="4x" className="red-text" />
                                 </div>
@@ -36,7 +41,7 @@ class HomePage extends Component {
                         </div>
 
                         <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
-                            <Link to="/playstation" className="card w-responsive hover-up">
+                            <Link to="/catalog?q=playstation" className="card w-responsive hover-up">
                                 <div className="card-body text-center">
                                     <MDBIcon fab icon="playstation" size="4x" className="indigo-text" />
                                 </div>

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { MDBTreeview, MDBTreeviewList, MDBTreeviewItem } from 'mdbreact';
+import {
+    MDBAnimation,
+    MDBTreeview,
+    MDBTreeviewList,
+    MDBTreeviewItem,
+} from 'mdbreact';
 
 // COMPONENTS
 import MainCarousel from './components/MainCarousel';
@@ -21,7 +26,7 @@ class Catalog extends Component {
         const { selectedData } = this.state
 
         return (
-            <div id="page-wrapper" className="px-5">
+            <MDBAnimation type="fadeIn" id="page-wrapper" className="px-5">
                 <div className="container-fluid">
                 
                     <div className="row">
@@ -73,7 +78,7 @@ class Catalog extends Component {
                     </div>
 
                 </div>
-            </div>
+            </MDBAnimation>
         );
     }
 }

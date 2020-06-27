@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem,
-    MDBNavbarToggler, MDBCollapse, MDBBtn, MDBIcon,
+    MDBNavbarToggler, MDBCollapse, MDBBtn, MDBIcon, MDBTooltip,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 
@@ -17,7 +17,7 @@ class Navbar extends Component {
     state = {
         isOpen: false,
         authOpen: false,
-        searchOpen: false
+        searchOpen: false,
     };
 
     // FUNCTIONS //
@@ -38,7 +38,6 @@ class Navbar extends Component {
     }
     // FUNCTIONS //
 
-
     // MAIN RENDER
     render() {
         return (
@@ -46,8 +45,8 @@ class Navbar extends Component {
                 dark
                 fixed="top"
                 expand="lg"
-                color="unique-color-dark"
                 className="py-1"
+                color="unique-color-dark"
             >
                 <div className="container">
 
@@ -62,11 +61,16 @@ class Navbar extends Component {
                         <MDBNavbarNav right>
 
                             {/* SEARCH BUTTON */}
-                            <MDBNavItem>
-                                <MDBBtn color='mdb-color' className="px-3 py-1" onClick={this.toggleSearch}>
-                                    <MDBIcon icon="search" />
+                            <MDBTooltip placement="bottom">
+                                <MDBBtn
+                                    color='white'
+                                    className="px-3 py-1"
+                                    onClick={this.toggleSearch}
+                                >
+                                    <MDBIcon icon="search" className="opacity-70" />
                                 </MDBBtn>
-                            </MDBNavItem>
+                                <span>Search</span>
+                            </MDBTooltip>
                             {/* SEARCH BUTTON */}
 
                             {/* SEARCH MODAL */}
@@ -74,11 +78,32 @@ class Navbar extends Component {
                             <AuthModal isOpen={this.state.authOpen} toggleAuth={this.toggleAuth} />
                             {/* SEARCH MODAL */}
 
+                            {/* CART */}
+                            <MDBTooltip placement="bottom">
+                                <Link
+                                    to='/cart'
+                                    className="btn btn-white pl-3 pr-2 py-1"
+                                >
+                                    <MDBIcon icon="shopping-cart" className="opacity-70" />
+                                    <div className="badge badge-danger rounded-circle ml-1">
+                                        3
+                                    </div>
+                                </Link>
+                                <span>Shopping Cart</span>
+                            </MDBTooltip>
+                            {/* CART */}
+
                             {
                                 !this.props.username
                                 ?
-                                    <MDBBtn color='mdb-color' className='px-3 py-1' onClick={this.toggleAuth}>
-                                        Login / Signup
+                                    <MDBBtn
+                                        color="white"
+                                        className='px-3 py-1'
+                                        onClick={this.toggleAuth}
+                                    >
+                                        <span className="opacity-70 font-weight-bold">
+                                            Login / Signup
+                                        </span>
                                     </MDBBtn>
                                 :
                                     <MDBNavItem>

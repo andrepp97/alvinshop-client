@@ -1,10 +1,17 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
-import { MDBIcon, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from 'mdbreact';
+import {
+    MDBIcon,
+    MDBDropdown,
+    MDBDropdownToggle,
+    MDBDropdownMenu,
+    MDBDropdownItem,
+    MDBAnimation
+} from 'mdbreact';
 
 const CartItem = ({ index, item, editQty }) => {
     return (
-        <div key={item.id} className="card mb-4 p-2" style={{ background: '#F9F9F9' }}>
+        <MDBAnimation type="fadeInUp" className="card mb-4 p-2" style={{ background: '#F9F9F9' }}>
 
             <div className="text-right d-block d-sm-none mb-n3" style={{zIndex: 999}}>
                 <MDBDropdown>
@@ -51,12 +58,12 @@ const CartItem = ({ index, item, editQty }) => {
                             Move to Favourites
                         </button>
                         <button className="btn px-2 py-1 ml-0" onClick={() => console.log(item)}>
-                            Remove
+                            <strong>Remove</strong>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </MDBAnimation>
     );
 };
 

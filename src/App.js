@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import Routes from './Routes';
 import Navbar from './1. Components/Navbar';
 
-
-
 class App extends Component {
   render() {
     return (

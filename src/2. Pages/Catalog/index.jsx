@@ -7,11 +7,64 @@ import {
 } from 'mdbreact';
 
 // COMPONENTS
-import MainCarousel from './components/MainCarousel';
-import SecondaryCarousel from './components/SecondaryCarousel';
+import Carousel from './components/Carousel';
 
 class Catalog extends Component {
     state = {
+        products1: [
+            {
+                id: 1,
+                name: 'Minecraft Dungeons',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co233r.jpg'
+            },
+            {
+                id: 2,
+                name: 'Animal Crossing: New Horizons',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co283p.jpg'
+            },
+            {
+                id: 3,
+                name: 'Tekken 7',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1w4f.jpg'
+            },
+            {
+                id: 4,
+                name: 'Final Fantasy VII',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmw.jpg'
+            },
+            {
+                id: 5,
+                name: 'Red Dead Redemption 2',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg'
+            }
+        ],
+        products2: [
+            {
+                id: 1,
+                name: 'God Of War',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg'
+            },
+            {
+                id: 2,
+                name: 'The Last Of Us',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg'
+            },
+            {
+                id: 3,
+                name: 'Metal Gear Solid 3: Snake Eater',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1ox4.jpg'
+            },
+            {
+                id: 4,
+                name: 'NieR: Automata',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/qhok1pi6egmfizjjii7r.jpg'
+            },
+            {
+                id: 5,
+                name: 'The Witcher 3: Wild Hunt',
+                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg'
+            }
+        ],
         selectedData: ''
     }
 
@@ -23,7 +76,11 @@ class Catalog extends Component {
     
     // MAIN RENDER
     render() {
-        const { selectedData } = this.state
+        const {
+            products1,
+            products2,
+            selectedData
+        } = this.state
 
         return (
             <MDBAnimation type="fadeIn" id="page-wrapper" className="px-5">
@@ -65,13 +122,13 @@ class Catalog extends Component {
                             <span className="text-uppercase font-weight-bolder spacing-2">
                                 Recommended
                             </span>
-                            <MainCarousel />
+                            <Carousel data={products1} />
 
                             {/* SECONDARY CAROUSEL */}
                             <span className="text-uppercase font-weight-bolder spacing-2">
                                 Today's Offer
                             </span>
-                            <SecondaryCarousel />
+                            <Carousel data={products2} />
 
                         </div>
 

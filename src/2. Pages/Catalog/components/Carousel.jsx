@@ -41,30 +41,7 @@ const responsive = {
     }
 }
 
-const images = [
-    {
-        name: 'Minecraft Dungeons',
-        image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co233r.jpg'
-    },
-    {
-        name: 'Animal Crossing: New Horizons',
-        image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co283p.jpg'
-    },
-    {
-        name: 'Tekken 7',
-        image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1w4f.jpg'
-    },
-    {
-        name: 'Final Fantasy VII',
-        image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmw.jpg'
-    },
-    {
-        name: 'Red Dead Redemption 2',
-        image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg'
-    }
-]
-
-const MainCarousel = () => {
+const MainCarousel = ({data}) => {
     return (
         <Carousel
             showDots={true}
@@ -72,8 +49,8 @@ const MainCarousel = () => {
             responsive={responsive}
             containerClass="mb-5 pb-4 pt-2"
         >
-            {images.map((item,idx) => (
-                <Link to='/product' key={idx}>
+            {data.map((item,idx) => (
+                <Link to={`/product/${item.id}`} key={idx}>
                     <img
                         alt={item.name}
                         src={item.image}

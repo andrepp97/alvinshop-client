@@ -24,6 +24,24 @@ code {
 .spacing-2 {
   letter-spacing: 2px;
 }
+
+.product-backdrop {
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  overflow: hidden;
+  height: 40vh;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.product-overlay {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(100, 100, 100, 0.75), rgba(24, 24, 24, 0.96));
+}
 /* ===== GLOBAL CLASSES ===== */
 
 

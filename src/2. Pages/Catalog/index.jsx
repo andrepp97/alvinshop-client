@@ -40,27 +40,27 @@ class Catalog extends Component {
         ],
         products2: [
             {
-                id: 1,
+                id: 7,
                 name: 'God Of War',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg'
             },
             {
-                id: 2,
+                id: 8,
                 name: 'The Last Of Us',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg'
             },
             {
-                id: 3,
+                id: 9,
                 name: 'Metal Gear Solid 3: Snake Eater',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1ox4.jpg'
             },
             {
-                id: 4,
+                id: 10,
                 name: 'NieR: Automata',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/qhok1pi6egmfizjjii7r.jpg'
             },
             {
-                id: 5,
+                id: 11,
                 name: 'The Witcher 3: Wild Hunt',
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg'
             }

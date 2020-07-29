@@ -37,7 +37,7 @@ class DetailProduk extends Component {
         const { data } = this.state
 
         return (
-            <MDBAnimation type="fadeIn" id="page-wrapper">
+            <MDBAnimation type="fadeIn" className="py-5">
                 <div className="container">
 
                     <div
@@ -47,14 +47,13 @@ class DetailProduk extends Component {
                         <div className="product-overlay" />
                     </div>
 
-                    <div style={{ marginTop: '10rem' }}>
+                    <div>
                         <div className="row mb-5">
                             <div className="col-md-4 text-center">
                                 <img
                                     src={data.poster}
                                     alt={data.name}
-                                    style={{ marginTop: '-10vh' }}
-                                    className="img-fluid rounded"
+                                    className="img-fluid rounded product-img"
                                 />
                                 <div>
                                     <button className="btn btn-brown w-responsive px-1 py-2 mt-3">
@@ -84,7 +83,7 @@ class DetailProduk extends Component {
                             </div>
                         </div>
 
-                        <div className="row mb-5">
+                        <div className="row">
                             <div className="col">
                                 <YouTube
                                     videoId={data.videoId}

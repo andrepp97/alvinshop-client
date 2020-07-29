@@ -29,9 +29,8 @@ code {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  position: absolute;
   overflow: hidden;
-  height: 40vh;
+  height: 36vh;
   width: 100%;
   left: 0;
   top: 0;
@@ -41,6 +40,10 @@ code {
   height: 100%;
   width: 100%;
   background: linear-gradient(rgba(100, 100, 100, 0.75), rgba(24, 24, 24, 0.96));
+}
+
+.product-img {
+  margin-top: -12vh;
 }
 /* ===== GLOBAL CLASSES ===== */
 

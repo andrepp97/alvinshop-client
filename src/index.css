@@ -48,6 +48,9 @@ code {
 /* ===== GLOBAL CLASSES ===== */
 
 
+.bg-main {
+  background: #f9f9f9;
+}
 
 #page-wrapper {
   background: #f9f9f9;

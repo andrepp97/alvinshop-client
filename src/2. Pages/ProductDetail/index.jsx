@@ -37,15 +37,15 @@ class DetailProduk extends Component {
         const { data } = this.state
 
         return (
-            <MDBAnimation type="fadeIn" className="py-5">
-                <div className="container">
-
+            <MDBAnimation type="fadeIn" className="bg-main pb-5">
                     <div
                         className="product-backdrop"
                         style={{ backgroundImage: `url(${data.backdrop})` }}
                     >
                         <div className="product-overlay" />
                     </div>
+                <div className="container">
+
 
                     <div>
                         <div className="row mb-5">

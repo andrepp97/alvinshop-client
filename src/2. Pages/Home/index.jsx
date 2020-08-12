@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { MDBAnimation, MDBIcon } from 'mdbreact';
 import Logo from '../../3. Assets/img/example.png';
 import './home.css';
@@ -26,14 +26,22 @@ class HomePage extends Component {
                     <MDBAnimation type="fadeIn" className="row py-3">
 
                         <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
-                            <Link to="/catalog?q=pc" className="card w-responsive hover-up">
+                            <NavLink
+                                to={{
+                                    pathname: "/catalog",
+                                    state: {
+                                        data: "PC"
+                                    }
+                                }}
+                                className="card w-responsive hover-up"
+                            >
                                 <div className="card-body text-center">
                                     <MDBIcon icon="desktop" size="4x" className="red-text" />
                                 </div>
                                 <div className="card-footer bg-danger text-white text-center">
                                     Aksesoris PC
                                 </div>
-                            </Link>
+                            </NavLink>
                         </MDBAnimation>
 
                         <div id="logo-home" className="col-md-4" style={{ zIndex:999 }}>
@@ -41,14 +49,22 @@ class HomePage extends Component {
                         </div>
 
                         <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
-                            <Link to="/catalog?q=playstation" className="card w-responsive hover-up">
+                            <NavLink
+                                to={{
+                                    pathname: "/catalog",
+                                    state: {
+                                        data: "Playstation"
+                                    }
+                                }}
+                                className="card w-responsive hover-up"
+                            >
                                 <div className="card-body text-center">
                                     <MDBIcon fab icon="playstation" size="4x" className="indigo-text" />
                                 </div>
                                 <div className="card-footer bg-primary text-white text-center">
                                     Playstation
                                 </div>
-                            </Link>
+                            </NavLink>
                         </MDBAnimation>
 
                     </MDBAnimation>

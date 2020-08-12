@@ -9,9 +9,14 @@ import {
     MDBAnimation
 } from 'mdbreact';
 
-const CartItem = ({ index, item, editQty }) => {
+const CartItem = ({ index, item, editQty, duration }) => {
     return (
-        <MDBAnimation type="fadeInUp" className="card mb-4 p-2" style={{ background: '#F9F9F9' }}>
+        <MDBAnimation
+            reveal
+            type="fadeInUp"
+            className="card mb-4 p-2"
+            style={{ background: '#f4f4f4' }}
+        >
 
             <div className="text-right d-block d-sm-none mb-n3" style={{zIndex: 999}}>
                 <MDBDropdown>
@@ -42,14 +47,13 @@ const CartItem = ({ index, item, editQty }) => {
                         <i className="fa fa-circle font-small opacity-80 d-none d-md-block mx-3" />
                         <div className="d-flex align-items-center mt-3 mt-md-0">
                             <span>Qty</span>
-                            <select
-                                className="custom-select mx-2"
+                            <input
+                                min={0}
+                                type="number"
+                                className="form-control w-responsive ml-2"
                                 onChange={e => editQty(e.target.value, index)}
-                            >
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                            </select>
+                                value={item.qty}
+                            />
                         </div>
                     </div>
                     <div className="d-none d-sm-block" style={{ position: 'absolute', bottom: 0, right: 12 }}>
@@ -57,8 +61,8 @@ const CartItem = ({ index, item, editQty }) => {
                             <MDBIcon far icon="heart" className="mr-2" />
                             Move to Favourites
                         </button>
-                        <button className="btn px-2 py-1 ml-0" onClick={() => console.log(item)}>
-                            <strong>Remove</strong>
+                        <button className="btn btn-red px-2 py-1 ml-0" onClick={() => console.log(item)}>
+                            <MDBIcon icon="trash" />
                         </button>
                     </div>
                 </div>

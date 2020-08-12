@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
-import {
-    MDBAnimation,
-    MDBTreeview,
-    MDBTreeviewList,
-    MDBTreeviewItem,
-} from 'mdbreact';
+import { MDBAnimation } from 'mdbreact';
+import './catalog.css';
 
 // COMPONENTS
+import CarouselFull from './components/CarouselFull';
 import Carousel from './components/Carousel';
+
+const discover = [
+    {
+        key: "node1",
+        icon: "gamepad",
+        label: "Playstation",
+        nodes: [
+            { key: "node1-1", label: "PS4" },
+            { key: "node1-2", label: "PS5" },
+        ]
+    },
+    {
+        key: "node2",
+        icon: "laptop",
+        label: "PC",
+        nodes: [
+            { key: "node2-1", label: "Headset" },
+            { key: "node2-2", label: "Keyboard" },
+            { key: "node2-3", label: "Mouse" },
+        ]
+    },
+]
 
 class Catalog extends Component {
     state = {
@@ -65,52 +84,66 @@ class Catalog extends Component {
                 image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg'
             }
         ],
-        selectedData: ''
+        selectedData: '',
     }
 
     // LIFECYCLE
     componentDidMount() {
-        let q = window.location.search.split('=')[1]
-        this.setState({ selectedData: q })
+        const { data } = this.props.location.state || ""
+        this.setState({ selectedData: data })
+        console.log(data)
     }
+    
     
     // MAIN RENDER
     render() {
         const {
             products1,
             products2,
-            selectedData
+            selectedData,
         } = this.state
 
         return (
-            <MDBAnimation type="fadeIn" id="page-wrapper" className="px-5">
-                <div className="container-fluid">
+            <MDBAnimation type="fadeIn">
+
+                <CarouselFull/>
+
+                <div className="container-fluid mt-5 px-5">
                 
                     <div className="row">
 
                         {/* LEFT COLUMN */}
                         <div className="col-lg-3 mb-4 mb-lg-0">
-                            <div className="card">
-                                <div className="card-body">
-                                    <span className="text-uppercase font-weight-bolder spacing-1 opacity-80">
-                                        Discover
-                                    </span>
-                                    <MDBTreeview
-                                        theme='animated'
-                                        className="opacity-90 mt-2"
-                                        getValue={value => console.log(value)}
-                                    >
-                                        <MDBTreeviewList icon='gamepad' title='Playstation' opened={selectedData === 'playstation'}>
-                                            <MDBTreeviewItem icon="none" title='PS 3' />
-                                            <MDBTreeviewItem icon="none" title='PS 4' />
-                                        </MDBTreeviewList>
-                                        <MDBTreeviewList icon="list-alt" title='Genre' opened={selectedData === 'genre'}>
-                                            <MDBTreeviewItem icon="none" title='Action' />
-                                            <MDBTreeviewItem icon="none" title='Casual' />
-                                            <MDBTreeviewItem icon="none" title='RPG' />
-                                            <MDBTreeviewItem icon="none" title='Racing' />
-                                        </MDBTreeviewList>
-                                    </MDBTreeview>
+                            <div className="sticky-top pt-5 mt-n5">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <p className="font-weight-bold spacing-1 opacity-80">
+                                            DISCOVER
+                                        </p>
+                                        <div className="list-group">
+                                            {discover.map(item => (
+                                                <div
+                                                    key={item.key}
+                                                    className="list-group-item"
+                                                >
+                                                    <span className="font-weight-bold">
+                                                        {item.label}
+                                                    </span>
+                                                    <div>
+                                                        {item.nodes.map(node => (
+                                                            <div
+                                                                key={node.key}
+                                                                onClick={() => this.setState({ selectedData: node.label })}
+                                                                className={`node-item pl-3 py-1 ${selectedData === node.label ? "node-item-active" : ""}`}
+                                                            >
+                                                                {node.label}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

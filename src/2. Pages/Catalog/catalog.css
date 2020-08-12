@@ -1,0 +1,13 @@
+.node-item {
+    cursor: pointer;
+    margin: 4px 0;
+    transition: .25;
+    border-radius: 4px;
+}
+.node-item:hover {
+    background: #dce2f1;
+}
+.node-item-active {
+    color: #FFF;
+    background: #1C2331 !important;
+}

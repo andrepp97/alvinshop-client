@@ -10,9 +10,6 @@ import {
 import SearchModal from './components/SearchModal';
 import AuthModal from './components/AuthModal';
 
-// LOGO
-import Logo from '../../3. Assets/img/example.png';
-
 class Navbar extends Component {
     state = {
         isOpen: false,
@@ -51,8 +48,8 @@ class Navbar extends Component {
                 <div className="container">
 
                     <MDBNavbarBrand>
-                        <Link to='/'>
-                            <img src={Logo} alt="LOGO" height={32} />
+                        <Link to='/' className="white-text font-weight-bold spacing-1">
+                            LOGO
                         </Link>
                     </MDBNavbarBrand>
 

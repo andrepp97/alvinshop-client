@@ -6,7 +6,7 @@ class Signup extends Component {
     render() {
         return (
             <div id="page-wrapper" className="d-flex align-items-center justify-content-center">
-                <div className="card card-auth mt-n5">
+                <div className="card-auth shadow mt-n5">
                     <h4 className="h4-responsive text-center text-uppercase">
                         Signup
                     </h4>

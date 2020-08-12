@@ -3,16 +3,20 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 
 const responsive = {
-    xl: {
-        breakpoint: { max: 4000, min: 3000 },
+    xxl: {
+        breakpoint: { max: 4000, min: 1920 },
         items: 5
     },
-    lg: {
-        breakpoint: { max: 3000, min: 1550 },
+    xl: {
+        breakpoint: { max: 1920, min: 1550 },
         items: 4
     },
+    lg: {
+        breakpoint: { max: 1550, min: 1368 },
+        items: 3.5
+    },
     md: {
-        breakpoint: { max: 1550, min: 1200 },
+        breakpoint: { max: 1368, min: 1200 },
         items: 3
     },
     sm: {
@@ -29,14 +33,18 @@ const responsive = {
     },
     xs2: {
         breakpoint: { max: 788, min: 655 },
-        items: 2
+        items: 2.1
     },
     mobile: {
-        breakpoint: { max: 655, min: 525 },
-        items: 1.5
+        breakpoint: { max: 650, min: 525 },
+        items: 1.6
     },
     mobile2: {
-        breakpoint: { max: 525, min: 0 },
+        breakpoint: { max: 525, min: 430 },
+        items: 1.25
+    },
+    mobile3: {
+        breakpoint: { max: 430, min: 0 },
         items: 1
     }
 }

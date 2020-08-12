@@ -24,6 +24,7 @@ class DetailProduk extends Component {
     componentDidMount() {
         const productId = this.props.match.params.id
         console.log(productId)
+        window.scrollTo(0,0)
     }
 
     // FUNCTIONS

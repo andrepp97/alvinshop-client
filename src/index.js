@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import './index.css';
 import App from './App';
+import './3. Assets/css/index.css';
 import * as serviceWorker from './serviceWorker';
 
 // LIBRARIES

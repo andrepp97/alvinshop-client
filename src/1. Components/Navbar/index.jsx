@@ -40,15 +40,17 @@ class Navbar extends Component {
         return (
             <MDBNavbar
                 dark
+                scrolling
+                transparent
                 fixed="top"
                 expand="lg"
+                color="white"
                 className="py-1"
-                color="unique-color-dark"
             >
                 <div className="container">
 
                     <MDBNavbarBrand>
-                        <Link to='/' className="white-text font-weight-bold spacing-1">
+                        <Link to='/' className="font-weight-bold text-muted spacing-1">
                             LOGO
                         </Link>
                     </MDBNavbarBrand>
@@ -61,7 +63,7 @@ class Navbar extends Component {
                             <MDBTooltip placement="bottom">
                                 <MDBBtn
                                     color='white'
-                                    className="px-3 py-1"
+                                    className="px-2 py-1 rounded-circle"
                                     onClick={this.toggleSearch}
                                 >
                                     <MDBIcon icon="search" className="opacity-70" />

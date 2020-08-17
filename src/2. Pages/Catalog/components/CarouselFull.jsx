@@ -18,7 +18,7 @@ const data = [
     {
         id: 2,
         name: 'Final Fantasy VII Remake',
-        image: 'https://www.dailyrush.dk/uploads/2020/06/ghost-of-tsushima.jpg'
+        image: 'https://images.pushsquare.com/c1143ad56a9e2/cyberpunk-2077-reversible-cover.original.jpg'
     },
     {
         id: 3,
@@ -33,13 +33,14 @@ const MainCarousel = () => {
             showDots={true}
             draggable={true}
             responsive={responsive}
+            containerClass="carousel-container"
         >
             {data.map((item,idx) => (
                 <Link to={`/product/${item.id}`} key={idx}>
                     <img
                         alt={item.name}
                         src={item.image}
-                        className="w-100 opacity-90"
+                        className="carousel-img"
                     />
                 </Link>
             ))}

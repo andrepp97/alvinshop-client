@@ -12,39 +12,39 @@ const responsive = {
         items: 4
     },
     lg: {
-        breakpoint: { max: 1550, min: 1368 },
+        breakpoint: { max: 1550, min: 1366 },
         items: 3.5
     },
     md: {
-        breakpoint: { max: 1368, min: 1200 },
+        breakpoint: { max: 1366, min: 1180 },
+        items: 3
+    },
+    md2: {
+        breakpoint: { max: 1180, min: 991 },
+        items: 2.5
+    },
+    md3: {
+        breakpoint: { max: 991, min: 900 },
         items: 3
     },
     sm: {
-      breakpoint: { max: 1200, min: 991 },
-      items: 2.5
-    },
-    sm2: {
-        breakpoint: { max: 991, min: 920 },
-        items: 3
-    },
-    xs: {
-        breakpoint: { max: 920, min: 788 },
+        breakpoint: { max: 900, min: 775 },
         items: 2.5
     },
     xs2: {
-        breakpoint: { max: 788, min: 655 },
-        items: 2.1
+        breakpoint: { max: 775, min: 640 },
+        items: 2.2
     },
     mobile: {
-        breakpoint: { max: 650, min: 525 },
-        items: 1.6
+        breakpoint: { max: 640, min: 520 },
+        items: 1.75
     },
     mobile2: {
-        breakpoint: { max: 525, min: 430 },
-        items: 1.25
+        breakpoint: { max: 520, min: 400 },
+        items: 1.3
     },
     mobile3: {
-        breakpoint: { max: 430, min: 0 },
+        breakpoint: { max: 400, min: 0 },
         items: 1
     }
 }

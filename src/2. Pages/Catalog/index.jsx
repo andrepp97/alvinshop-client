@@ -3,6 +3,7 @@ import { MDBAnimation } from 'mdbreact';
 import './catalog.css';
 
 // COMPONENTS
+import MasonryCarousel from './components/MasonryCarousel';
 import CarouselFull from './components/CarouselFull';
 import Carousel from './components/Carousel';
 
@@ -108,13 +109,15 @@ class Catalog extends Component {
 
                 <CarouselFull/>
 
-                <div className="container-fluid mt-5 px-5">
-                
-                    <div className="row">
+                <div className="container-fluid mt-5 px-4 px-md-5">
+
+                    <MasonryCarousel />
+
+                    <div className="row mt-5">
 
                         {/* LEFT COLUMN */}
                         <div className="col-lg-3 mb-4 mb-lg-0">
-                            <div className="sticky-top pt-5 mt-n5">
+                            <div className="sticky-top pt-4 pt-lg-5 mt-n3">
                                 <div className="card">
                                     <div className="card-body">
                                         <p className="font-weight-bold spacing-1 opacity-80">
@@ -166,7 +169,6 @@ class Catalog extends Component {
                         </div>
 
                     </div>
-
                 </div>
             </MDBAnimation>
         );

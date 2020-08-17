@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import YouTube from 'react-youtube';
 import { MDBAnimation } from 'mdbreact';
+import YouTube from 'react-youtube';
+import './style.css';
 
 class DetailProduk extends Component {
     state = {

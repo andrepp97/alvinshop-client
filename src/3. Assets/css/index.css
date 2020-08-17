@@ -20,38 +20,7 @@ code {
 }
 
 
-
 /* ===== GLOBAL CLASSES ===== */
-.spacing-1 {
-  letter-spacing: 1px;
-}
-.spacing-2 {
-  letter-spacing: 2px;
-}
-
-.product-backdrop {
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-  height: 36vh;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-
-.product-overlay {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(rgba(100, 100, 100, 0.75), rgba(24, 24, 24, 0.96));
-}
-
-.product-img {
-  margin-top: -12vh;
-}
-/* ===== GLOBAL CLASSES ===== */
-
-
 .bg-main {
   background: #f9f9f9;
 }
@@ -75,8 +44,16 @@ code {
   background: #e0e0e0;
 }
 
+.spacing-1 {
+  letter-spacing: 1px;
+}
+.spacing-2 {
+  letter-spacing: 2px;
+}
+/* ===== GLOBAL CLASSES ===== */
 
 
+/* ===== RESPONSIVES ===== */
 @media only screen and (max-width: 767px) {
   #logo-home {
     display: none;

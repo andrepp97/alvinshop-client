@@ -109,7 +109,7 @@ class Catalog extends Component {
 
                 <CarouselFull/>
 
-                <div className="container-fluid mt-5 px-4 px-md-5">
+                <div className="container-fluid pb-5 mt-5 px-4 px-md-5">
 
                     <MasonryCarousel />
 

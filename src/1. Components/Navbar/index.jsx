@@ -50,7 +50,7 @@ class Navbar extends Component {
                 <div className="container">
 
                     <MDBNavbarBrand>
-                        <Link to='/' className="font-weight-bold text-muted spacing-1">
+                        <Link to='/' className="font-weight-bold brown-text spacing-1">
                             LOGO
                         </Link>
                     </MDBNavbarBrand>

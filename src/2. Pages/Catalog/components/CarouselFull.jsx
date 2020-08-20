@@ -12,24 +12,27 @@ const responsive = {
 const data = [
     {
         id: 1,
-        name: 'Final Fantasy VII Remake',
-        image: 'https://www.dailyrush.dk/uploads/2020/06/ghost-of-tsushima.jpg'
+        name: 'The Witcher 3',
+        image: 'https://news-cdn.softpedia.com/images/news2/The-Witcher-3-The-Wild-Hunt-Delay-Was-Caused-by-Lots-of-Small-Errors-467089-2.jpg'
     },
     {
         id: 2,
         name: 'Final Fantasy VII Remake',
-        image: 'https://images.pushsquare.com/c1143ad56a9e2/cyberpunk-2077-reversible-cover.original.jpg'
+        image: 'https://www.dailyrush.dk/uploads/2020/06/ghost-of-tsushima.jpg'
     },
     {
         id: 3,
-        name: 'Final Fantasy VII Remake',
-        image: 'https://www.dailyrush.dk/uploads/2020/06/ghost-of-tsushima.jpg'
+        name: 'Cyberpunk 2077',
+        image: 'https://images.pushsquare.com/c1143ad56a9e2/cyberpunk-2077-reversible-cover.original.jpg'
     },
 ]
 
 const MainCarousel = () => {
     return (
         <Carousel
+            infinite
+            autoPlay
+            autoPlaySpeed={3000}
             showDots={true}
             draggable={true}
             responsive={responsive}

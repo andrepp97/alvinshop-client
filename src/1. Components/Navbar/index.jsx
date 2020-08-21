@@ -43,7 +43,7 @@ class Navbar extends Component {
                 scrolling
                 transparent
                 fixed="top"
-                expand="lg"
+                expand="md"
                 color="white"
                 className="py-1"
             >
@@ -63,10 +63,11 @@ class Navbar extends Component {
                             <MDBTooltip placement="bottom">
                                 <MDBBtn
                                     color='white'
-                                    className="px-2 py-1 rounded-circle"
+                                    className="px-2 py-1"
                                     onClick={this.toggleSearch}
                                 >
                                     <MDBIcon icon="search" className="opacity-70" />
+                                    <small className="d-md-none ml-2">Search</small>
                                 </MDBBtn>
                                 <span>Search</span>
                             </MDBTooltip>

@@ -6,6 +6,7 @@ import './catalog.css';
 import MasonryCarousel from './components/MasonryCarousel';
 import CarouselFull from './components/CarouselFull';
 import Carousel from './components/Carousel';
+import Partner from './components/Partner';
 
 const discover = [
     {
@@ -166,9 +167,16 @@ class Catalog extends Component {
                             </span>
                             <Carousel data={products2} />
 
+                            {/* PARTNERS CAROUSEL */}
+                            <span className="text-uppercase font-weight-bolder spacing-2">
+                                Our Partners
+                            </span>
+                            <Partner />
+
                         </div>
 
                     </div>
+
                 </div>
             </MDBAnimation>
         );

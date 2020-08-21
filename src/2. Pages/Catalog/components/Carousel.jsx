@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { MDBAnimation } from 'mdbreact';
 import Carousel from 'react-multi-carousel';
 
 const responsive = {
@@ -32,16 +33,16 @@ const responsive = {
         items: 2.5
     },
     xs2: {
-        breakpoint: { max: 775, min: 640 },
+        breakpoint: { max: 775, min: 650 },
         items: 2.2
     },
     mobile: {
-        breakpoint: { max: 640, min: 520 },
+        breakpoint: { max: 650, min: 530 },
         items: 1.75
     },
     mobile2: {
-        breakpoint: { max: 520, min: 400 },
-        items: 1.3
+        breakpoint: { max: 530, min: 400 },
+        items: 1.25
     },
     mobile3: {
         breakpoint: { max: 400, min: 0 },
@@ -51,22 +52,24 @@ const responsive = {
 
 const MainCarousel = ({data}) => {
     return (
-        <Carousel
-            showDots={true}
-            draggable={true}
-            responsive={responsive}
-            containerClass="mb-5 pb-4 pt-2"
-        >
-            {data.map((item,idx) => (
-                <Link to={`/product/${item.id}`} key={idx}>
-                    <img
-                        alt={item.name}
-                        src={item.image}
-                        className="img-fluid rounded shadow"
-                    />
-                </Link>
-            ))}
-        </Carousel>
+        <MDBAnimation reveal type="fadeInUp">
+            <Carousel
+                showDots={true}
+                draggable={true}
+                responsive={responsive}
+                containerClass="mb-5 pb-4 pt-2"
+            >
+                {data.map((item,idx) => (
+                    <Link to={`/product/${item.id}`} key={idx}>
+                        <img
+                            alt={item.name}
+                            src={item.image}
+                            className="img-fluid rounded shadow"
+                        />
+                    </Link>
+                ))}
+            </Carousel>
+        </MDBAnimation>
     );
 };
 

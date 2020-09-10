@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
+import Cover from '../../../3. Assets/img/cover.gif';
 
 const responsive = {
     md: {
@@ -13,7 +14,7 @@ const data = [
     {
         id: 1,
         name: 'The Witcher 3',
-        image: 'https://news-cdn.softpedia.com/images/news2/The-Witcher-3-The-Wild-Hunt-Delay-Was-Caused-by-Lots-of-Small-Errors-467089-2.jpg'
+        image: Cover
     },
     {
         id: 2,
@@ -32,7 +33,7 @@ const MainCarousel = () => {
         <Carousel
             infinite
             autoPlay
-            autoPlaySpeed={3000}
+            autoPlaySpeed={4000}
             showDots={true}
             draggable={true}
             responsive={responsive}

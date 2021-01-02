@@ -15,7 +15,6 @@ const CartItem = ({ index, item, editQty, duration }) => {
             reveal
             type="fadeInUp"
             className="card mb-4 p-2"
-            style={{ background: '#f4f4f4' }}
         >
 
             <div className="text-right d-block d-sm-none mb-n3" style={{zIndex: 999}}>

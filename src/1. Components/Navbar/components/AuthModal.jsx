@@ -1,7 +1,78 @@
-import React from 'react';
-import { MDBModal, MDBModalBody, MDBInput } from 'mdbreact';
+import React, { useState, useContext } from 'react';
+import {
+    MDBInput,
+    MDBModal,
+    MDBModalBody,
+} from 'mdbreact';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../../7. Context/AuthContext';
+import APIRequest, { setClientToken } from '../../../4. Api/APIRequest';
 
 const AuthModal = ({ isOpen, toggleAuth }) => {
+    // CONTEXT
+    const { dispatch } = useContext(AuthContext)
+
+    // STATE
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    // VALIDATION
+    const loginValidation = () => {
+        let err = null
+
+        if (password.length < 6) err = "Password must be at least 6 characters"
+        if (!username) err = "Username is required"
+
+        if (err) {
+            Swal.fire({
+                title: "Please Check Your Inputs",
+                icon: "warning",
+                text: err,
+            })
+        }
+        return err
+    }
+
+    // LOGIN FUNCTION
+    const onUserLogin = () => {
+        if (!loginValidation()) {
+            setLoading(true)
+
+            const body = {
+                username,
+                password,
+            }
+
+            APIRequest.post('user/login', body)
+            .then(({data}) => {
+                setClientToken(data.data)
+                dispatch({
+                    type: 'LOGIN',
+                    ...data.data
+                })
+            })
+            .catch(err => {
+                const res = err.response
+                if (res) {
+                    Swal.fire({
+                        title: `Error (${res.status})`,
+                        text: res.data.message,
+                        icon: "error",
+                    })
+                }
+            })
+            .finally(() => setLoading(false))
+        }
+    }
+
+    const onKeypressLogin = (event) => {
+        if (event.key === 'Enter') {
+            onUserLogin()
+        }
+    }
+
+    // RENDER
     return (
         <MDBModal isOpen={isOpen} toggle={toggleAuth} centered>
 
@@ -20,14 +91,30 @@ const AuthModal = ({ isOpen, toggleAuth }) => {
                 <hr/>
 
                 <div>
-                    <MDBInput outline label="Username" icon="user" />
-                    <MDBInput outline label="Password" type="password" icon="key" />
+                    <MDBInput
+                        outline
+                        icon="user"
+                        label="Username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                        onKeyUp={onKeypressLogin}
+                    />
+                    <MDBInput
+                        outline
+                        icon="key"
+                        type="password"
+                        label="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyUp={onKeypressLogin}
+                    />
                     <button
                         className="btn btn-block btn-indigo font-weight-bold px-3 py-2"
                         style={{ letterSpacing: '1px' }}
+                        onClick={onUserLogin}
+                        disabled={loading}
                     >
-                        <i className="fa fa-sign-in-alt mr-2" />
-                        Login
+                        {loading ? <div className="spinner-border spinner-border-sm" role="status" /> : "Login"}
                     </button>
                 </div>
 

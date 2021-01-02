@@ -1,7 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import Cover from '../../../3. Assets/img/cover.gif';
+import Loader from '../../../1. Components/Loader';
+import APIRequest from '../../../4. Api/APIRequest';
+import { BASE_URL } from '../../../5. Helper/settings';
 
 const responsive = {
     md: {
@@ -10,26 +11,28 @@ const responsive = {
     },
 }
 
-const data = [
-    {
-        id: 1,
-        name: 'The Witcher 3',
-        image: Cover
-    },
-    {
-        id: 2,
-        name: 'Final Fantasy VII Remake',
-        image: 'https://www.dailyrush.dk/uploads/2020/06/ghost-of-tsushima.jpg'
-    },
-    {
-        id: 3,
-        name: 'Cyberpunk 2077',
-        image: 'https://images.pushsquare.com/c1143ad56a9e2/cyberpunk-2077-reversible-cover.original.jpg'
-    },
-]
-
 const MainCarousel = () => {
-    return (
+    // STATE
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    // GET BANNER
+    const getBannerData = () => {
+        APIRequest.get('user/banner')
+        .then(({data}) => setData(data.data))
+        .catch(err => console.log(err))
+        .finally(() => setLoading(false))
+    }
+
+    // LIFECYCLE
+    useEffect(() => {
+        getBannerData()
+    }, [])
+    
+    // RENDER
+    return loading
+    ? <Loader />
+    : (
         <Carousel
             infinite
             autoPlay
@@ -40,13 +43,18 @@ const MainCarousel = () => {
             containerClass="carousel-container"
         >
             {data.map((item,idx) => (
-                <Link to={`/product/${item.id}`} key={idx}>
+                <a
+                    key={idx}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <img
-                        alt={item.name}
-                        src={item.image}
+                        alt={item.banner_name}
                         className="carousel-img"
+                        src={BASE_URL + item.banner_image}
                     />
-                </Link>
+                </a>
             ))}
         </Carousel>
     );

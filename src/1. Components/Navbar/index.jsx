@@ -1,139 +1,140 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from 'react-router-dom';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem,
-    MDBNavbarToggler, MDBCollapse, MDBBtn, MDBIcon, MDBTooltip,
+    MDBBtn, MDBIcon, MDBTooltip,
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav,
+    MDBNavItem, MDBNavbarToggler, MDBCollapse,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
+
+import { AuthContext } from '../../7. Context/AuthContext';
+import { TOKEN_PREFIX } from '../../5. Helper/settings';
 
 // COMPONENTS
 import SearchModal from './components/SearchModal';
 import AuthModal from './components/AuthModal';
 
-class Navbar extends Component {
-    state = {
-        isOpen: false,
-        authOpen: false,
-        searchOpen: false,
-    };
+const Navbar = () => {
+    // CONTEXT
+    const {userState, dispatch} = useContext(AuthContext)
 
-    // FUNCTIONS //
-    toggleCollapse = () => {
-        this.setState({ isOpen: !this.state.isOpen })
+    // STATE
+    const [isOpen, setIsOpen] = useState(false)
+    const [authOpen, setAuthOpen] = useState(false)
+    const [searchOpen, setSearchOpen] = useState(false)
+
+    // LIFECYCLE
+    useEffect(() => {
+        if (userState.userToken) setAuthOpen(false)
+    }, [userState.userToken])
+
+    // TOGGLE MODAL
+    const toggleCollapse = () => {
+        setIsOpen(!isOpen)
     }
 
-    toggleSearch = () => {
-        this.setState({ searchOpen: !this.state.searchOpen })
+    const toggleSearch = () => {
+        setSearchOpen(!searchOpen)
     }
 
-    toggleAuth = () => {
-        this.setState({ authOpen: !this.state.authOpen })
+    const toggleAuth = () => {
+        setAuthOpen(!authOpen)
     }
 
-    onUserLogout = () => {
-        this.props.userLogout()
+    // LOGOUT FUNCTION
+    const onUserLogout = () => {
+        dispatch({ type: 'LOGOUT' })
+        localStorage.removeItem(TOKEN_PREFIX)
     }
-    // FUNCTIONS //
+    
+    // RENDER
+    return (
+        <MDBNavbar
+            light
+            fixed="top"
+            expand="md"
+            color="white"
+            className="py-1"
+        >
+            <div className="container">
 
-    // MAIN RENDER
-    render() {
-        return (
-            <MDBNavbar
-                dark
-                scrolling
-                transparent
-                fixed="top"
-                expand="md"
-                color="white"
-                className="py-1"
-            >
-                <div className="container">
+                <MDBNavbarBrand>
+                    <Link to='/' className="font-weight-bold brown-text spacing-1">
+                        LOGO
+                    </Link>
+                </MDBNavbarBrand>
 
-                    <MDBNavbarBrand>
-                        <Link to='/' className="font-weight-bold brown-text spacing-1">
-                            LOGO
-                        </Link>
-                    </MDBNavbarBrand>
+                <MDBNavbarToggler onClick={toggleCollapse} />
+                <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
+                    <MDBNavbarNav right>
 
-                    <MDBNavbarToggler onClick={this.toggleCollapse} />
-                    <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-                        <MDBNavbarNav right>
+                        {/* SEARCH BUTTON */}
+                        <MDBTooltip placement="bottom">
+                            <MDBBtn
+                                color='white'
+                                className="px-2 py-1"
+                                onClick={toggleSearch}
+                            >
+                                <MDBIcon icon="search" className="opacity-70" />
+                                <small className="d-md-none ml-2">Search</small>
+                            </MDBBtn>
+                            <span>Search</span>
+                        </MDBTooltip>
+                        {/* SEARCH BUTTON */}
 
-                            {/* SEARCH BUTTON */}
-                            <MDBTooltip placement="bottom">
+                        {/* SEARCH MODAL */}
+                        <SearchModal isOpen={searchOpen} toggleSearch={toggleSearch} />
+                        <AuthModal isOpen={authOpen} toggleAuth={toggleAuth} />
+
+                        {
+                            !userState.userToken
+                            ?
                                 <MDBBtn
-                                    color='white'
-                                    className="px-2 py-1"
-                                    onClick={this.toggleSearch}
+                                    color="white"
+                                    className='px-3 py-1'
+                                    onClick={toggleAuth}
                                 >
-                                    <MDBIcon icon="search" className="opacity-70" />
-                                    <small className="d-md-none ml-2">Search</small>
+                                    <span className="opacity-70 font-weight-bold">
+                                        Login / Signup
+                                    </span>
                                 </MDBBtn>
-                                <span>Search</span>
-                            </MDBTooltip>
-                            {/* SEARCH BUTTON */}
-
-                            {/* SEARCH MODAL */}
-                            <SearchModal isOpen={this.state.searchOpen} toggleSearch={this.toggleSearch} />
-                            <AuthModal isOpen={this.state.authOpen} toggleAuth={this.toggleAuth} />
-                            {/* SEARCH MODAL */}
-
-                            {/* CART */}
-                            <MDBTooltip placement="bottom">
-                                <Link
-                                    to='/cart'
-                                    className="btn btn-white pl-3 pr-2 py-1"
-                                >
-                                    <MDBIcon icon="shopping-cart" className="opacity-70" />
-                                    <div className="badge badge-danger rounded-circle ml-1">
-                                        3
-                                    </div>
-                                </Link>
-                                <span>Shopping Cart</span>
-                            </MDBTooltip>
-                            {/* CART */}
-
-                            {
-                                !this.props.username
-                                ?
-                                    <MDBBtn
-                                        color="white"
-                                        className='px-3 py-1'
-                                        onClick={this.toggleAuth}
+                            :
+                            <>
+                                <MDBTooltip placement="bottom">
+                                    <Link
+                                        to='/cart'
+                                        onClick={() => setIsOpen(false)}
+                                        className="btn btn-white pl-3 pr-2 py-1"
                                     >
-                                        <span className="opacity-70 font-weight-bold">
-                                            Login / Signup
-                                        </span>
-                                    </MDBBtn>
-                                :
-                                    <MDBNavItem>
-                                        <MDBDropdown>
-                                            <MDBDropdownToggle nav className="d-flex align-items-center">
-                                                <MDBIcon icon="user-circle" style={{ fontSize: '24px' }} />
-                                                <small className="ml-2">{this.props.username}</small>
-                                            </MDBDropdownToggle>
-                                            <MDBDropdownMenu>
-                                                <div className="text-center grey-text px-2 mb-3">
-                                                    <small>{this.props.email}</small>
-                                                </div>
-                                                <MDBDropdownItem>
-                                                    <MDBIcon icon="tachometer-alt" className="mr-2" />Dashboard
+                                        <MDBIcon icon="shopping-cart" className="opacity-70" />
+                                        <div className="badge badge-danger rounded-circle ml-1">
+                                            3
+                                        </div>
+                                    </Link>
+                                    <span>Shopping Cart</span>
+                                </MDBTooltip>
+                                <MDBNavItem>
+                                    <MDBDropdown>
+                                        <MDBDropdownToggle nav className="d-flex align-items-center">
+                                            <MDBIcon icon="user-circle" style={{ fontSize: '24px' }} />
+                                            <small className="ml-2">{userState.userName}</small>
+                                        </MDBDropdownToggle>
+                                        <MDBDropdownMenu>
+                                            <MDBDropdownItem onClick={onUserLogout}>
+                                                <MDBIcon icon="sign-out-alt" className="mr-2" />
+                                                Logout
                                             </MDBDropdownItem>
-                                                <hr className="my-2" />
-                                                <MDBDropdownItem onClick={this.onUserLogout}>
-                                                    <MDBIcon icon="sign-out-alt" className="mr-2" />Logout
-                                            </MDBDropdownItem>
-                                            </MDBDropdownMenu>
-                                        </MDBDropdown>
-                                    </MDBNavItem>
-                            }
-                        </MDBNavbarNav>
-                    </MDBCollapse>
+                                        </MDBDropdownMenu>
+                                    </MDBDropdown>
+                                </MDBNavItem>
+                            </>
+                        }
+                    </MDBNavbarNav>
+                </MDBCollapse>
 
-                </div>
-            </MDBNavbar>
-        );
-    }
-}
+            </div>
+        </MDBNavbar>
+    );
+};
 
 export default Navbar;

@@ -36,8 +36,8 @@ const App = () => {
       }
     }
     
-    restoreToken()
     getSettings()
+    restoreToken()
   }, [dispatch, getSettings])
 
   // RENDER

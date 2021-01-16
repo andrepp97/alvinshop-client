@@ -36,20 +36,22 @@ const FooterSection = ({settings}) => {
         <MDBRow>
           <MDBCol md="4" className="mb-5">
             <h5 className="text-uppercase">
-                {settings.name}
+                {settings ? settings.name : ""}
             </h5>
             <small className="opacity-70">
-              {settings.description}
+              {settings ? settings.description : ""}
             </small>
           </MDBCol>
           <MDBCol md="4" className="mb-5">
-            <h5 className="text-uppercase">Marketplace</h5>
+            <h5 className="text-uppercase">
+              Marketplace
+            </h5>
             {marketplace.map(item => (
                 <a
                     key={item.text}
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={item.url + settings[item.text]}
+                    href={settings ? item.url + settings[item.text] : ""}
                 >
                     <img
                         className="rounded m-2"
@@ -64,7 +66,7 @@ const FooterSection = ({settings}) => {
             <h5 className="text-uppercase">Offline Store</h5>
             <div className="opacity-70">
                 <span>
-                    {settings.address}
+                    {settings ? settings.address : ""}
                 </span>
             </div>
           </MDBCol>
@@ -73,7 +75,7 @@ const FooterSection = ({settings}) => {
         <hr className="border-white my-5" />
 
         <div className="text-center spacing-1">
-            &copy; {new Date().getFullYear()} <span className="text-uppercase">{settings.name}</span> - All Rights Reserved.
+            &copy; {new Date().getFullYear()} <span className="text-uppercase">{settings ? settings.name : ""}</span> - All Rights Reserved.
         </div>
 
       </MDBContainer>

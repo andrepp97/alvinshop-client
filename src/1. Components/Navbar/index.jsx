@@ -61,8 +61,8 @@ const Navbar = ({settings, prefix}) => {
                 <MDBNavbarBrand>
                     <Link to='/' className="font-weight-bold brown-text spacing-1">
                         <img
-                            src={BASE_URL + prefix + '/' + settings.icon_shop}
-                            alt={settings.name}
+                            src={settings ? BASE_URL + prefix + '/' + settings.icon_shop : null}
+                            alt={settings ? settings.name : ""}
                             height={32}
                         />
                     </Link>

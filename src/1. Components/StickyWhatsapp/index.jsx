@@ -8,7 +8,7 @@ const StickyWhatsapp = ({settings}) => {
             target="_blank"
             rel="noopener noreferrer"
             className="sticky-whatsapp"
-            href={settings.whatsapp_url}
+            href={settings ? settings.whatsapp_url : ""}
         >
             <MDBIcon fab icon="whatsapp" />
         </a>

@@ -50,9 +50,9 @@ const HomePage = () => {
 
                     <div id="logo-home" className="col-md-4" style={{ zIndex:99 }}>
                         <img
-                            alt={settings.name}
                             className="img-thumbnail"
-                            src={BASE_URL + settingsPrefix + '/' + settings.icon_shop}
+                            alt={settings ? settings.name : ""}
+                            src={settings ? BASE_URL + settingsPrefix + '/' + settings.icon_shop : ""}
                         />
                     </div>
 

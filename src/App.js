@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { setClientToken } from './4. Api/APIRequest';
 import { TOKEN_PREFIX } from './5. Helper/settings';
 import { AuthContext } from './7. Context/AuthContext';
+import { SettingsContext } from './7. Context/SettingsContext';
 
 // COMPONENTS
 import Router from './6. Routes/Router';
@@ -13,6 +14,7 @@ import StickyWhatsapp from './1. Components/StickyWhatsapp';
 const App = () => {
   // CONTEXT
   const { userState, dispatch } = useContext(AuthContext)
+  const { getSettings, settings, settingsPrefix } = useContext(SettingsContext)
 
   // LIFECYCLE
   useEffect(() => {
@@ -33,19 +35,20 @@ const App = () => {
         })
       }
     }
-
+    
     restoreToken()
-  }, [dispatch])
+    getSettings()
+  }, [dispatch, getSettings])
 
   // RENDER
   return userState.isLoading
   ? <LoadingScreen />
   : (
     <div>
-      <Navbar />
+      <Navbar settings={settings} prefix={settingsPrefix} />
       <Router />
-      <StickyWhatsapp />
-      <Footer />
+      <Footer settings={settings} />
+      <StickyWhatsapp settings={settings} />
     </div>
   );
 };

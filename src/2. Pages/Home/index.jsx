@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MDBAnimation, MDBIcon } from 'mdbreact';
-import Logo from '../../3. Assets/img/example.png';
+import { BASE_URL } from '../../5. Helper/settings';
+import { SettingsContext } from '../../7. Context/SettingsContext';
 import './home.css';
 
 const HomePage = () => {
+    // CONTEXT
+    const { settings, settingsPrefix } = useContext(SettingsContext)
+
     // LIFECYCLE
     useEffect(() => {
         window.scrollTo(0,0)
     }, [])
 
+    // RENDER
     return (
         <div id="page-wrapper">
             <div className="container h-100">
 
-                <h2 className="text-center animation fadeInDown h2-responsive pt-3" style={{ letterSpacing: '2px' }}>
+                <h2 className="h2-responsive animation fadeInDown headline-text">
                     WELCOME TO GAMING REVOLUTION
                 </h2>
 
@@ -43,8 +48,12 @@ const HomePage = () => {
                         </NavLink>
                     </MDBAnimation>
 
-                    <div id="logo-home" className="col-md-4" style={{ zIndex:999 }}>
-                        <img src={Logo} className="img-thumbnail img-fluid rounded-circle shadow" alt=""/>
+                    <div id="logo-home" className="col-md-4" style={{ zIndex:99 }}>
+                        <img
+                            alt={settings.name}
+                            className="img-thumbnail"
+                            src={BASE_URL + settingsPrefix + '/' + settings.icon_shop}
+                        />
                     </div>
 
                     <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">

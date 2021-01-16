@@ -2,11 +2,16 @@ import React from 'react';
 import { MDBIcon } from 'mdbreact';
 import './style.css';
 
-const StickyWhatsapp = () => {
+const StickyWhatsapp = ({settings}) => {
     return (
-        <div className="sticky-whatsapp">
+        <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sticky-whatsapp"
+            href={settings.whatsapp_url}
+        >
             <MDBIcon fab icon="whatsapp" />
-        </div>
+        </a>
     );
 };
 

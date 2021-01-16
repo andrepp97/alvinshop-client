@@ -21,5 +21,6 @@
 }
 
 .sticky-whatsapp:hover {
+    color: rgb(228, 228, 228);
     transform: translateY(-4px);
 }

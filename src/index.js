@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import AuthContextProvider from './7. Context/AuthContext';
+import SettingsContextProvider from './7. Context/SettingsContext';
 
 // CSS
 import './3. Assets/css/index.css';
@@ -15,9 +16,11 @@ import 'react-multi-carousel/lib/styles.css';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthContextProvider>
-        <App />
-      </AuthContextProvider>
+      <SettingsContextProvider>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </SettingsContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

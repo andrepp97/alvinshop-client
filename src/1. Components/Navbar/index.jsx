@@ -8,13 +8,13 @@ import {
 } from "mdbreact";
 
 import { AuthContext } from '../../7. Context/AuthContext';
-import { TOKEN_PREFIX } from '../../5. Helper/settings';
+import { TOKEN_PREFIX, BASE_URL } from '../../5. Helper/settings';
 
 // COMPONENTS
 import SearchModal from './components/SearchModal';
 import AuthModal from './components/AuthModal';
 
-const Navbar = () => {
+const Navbar = ({settings, prefix}) => {
     // CONTEXT
     const {userState, dispatch} = useContext(AuthContext)
 
@@ -60,7 +60,11 @@ const Navbar = () => {
 
                 <MDBNavbarBrand>
                     <Link to='/' className="font-weight-bold brown-text spacing-1">
-                        LOGO
+                        <img
+                            src={BASE_URL + prefix + '/' + settings.icon_shop}
+                            alt={settings.name}
+                            height={32}
+                        />
                     </Link>
                 </MDBNavbarBrand>
 
@@ -69,54 +73,40 @@ const Navbar = () => {
                     <MDBNavbarNav right>
 
                         {/* SEARCH BUTTON */}
-                        <MDBTooltip placement="bottom">
-                            <MDBBtn
-                                color='white'
-                                className="px-2 py-1"
-                                onClick={toggleSearch}
-                            >
-                                <MDBIcon icon="search" className="opacity-70" />
-                                <small className="d-md-none ml-2">Search</small>
-                            </MDBBtn>
-                            <span>Search</span>
-                        </MDBTooltip>
-                        {/* SEARCH BUTTON */}
+                        <button
+                            className="btn-navbar"
+                            onClick={toggleSearch}
+                        >
+                            <MDBIcon icon="search" />
+                            <small className="d-md-none ml-2">Search</small>
+                        </button>
 
-                        {/* SEARCH MODAL */}
+                        {/* MODAL */}
                         <SearchModal isOpen={searchOpen} toggleSearch={toggleSearch} />
                         <AuthModal isOpen={authOpen} toggleAuth={toggleAuth} />
 
                         {
                             !userState.userToken
                             ?
-                                <MDBBtn
-                                    color="white"
-                                    className='px-3 py-1'
+                                <button
+                                    className='btn-navbar'
                                     onClick={toggleAuth}
                                 >
-                                    <span className="opacity-70 font-weight-bold">
-                                        Login / Signup
-                                    </span>
-                                </MDBBtn>
+                                    Login / Signup
+                                </button>
                             :
                             <>
-                                <MDBTooltip placement="bottom">
-                                    <Link
-                                        to='/cart'
-                                        onClick={() => setIsOpen(false)}
-                                        className="btn btn-white pl-3 pr-2 py-1"
-                                    >
-                                        <MDBIcon icon="shopping-cart" className="opacity-70" />
-                                        <div className="badge badge-danger rounded-circle ml-1">
-                                            3
-                                        </div>
-                                    </Link>
-                                    <span>Shopping Cart</span>
-                                </MDBTooltip>
+                                <Link
+                                    to='/cart'
+                                    onClick={() => setIsOpen(false)}
+                                    className="btn-navbar"
+                                >
+                                    <MDBIcon icon="shopping-cart" />
+                                </Link>
                                 <MDBNavItem>
-                                    <MDBDropdown>
-                                        <MDBDropdownToggle nav className="d-flex align-items-center">
-                                            <MDBIcon icon="user-circle" style={{ fontSize: '24px' }} />
+                                    <MDBDropdown className="mx-1">
+                                        <MDBDropdownToggle nav>
+                                            <MDBIcon icon="user-circle" />
                                             <small className="ml-2">{userState.userName}</small>
                                         </MDBDropdownToggle>
                                         <MDBDropdownMenu>

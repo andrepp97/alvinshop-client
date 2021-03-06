@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MDBAnimation } from 'mdbreact';
 import Carousel from 'react-multi-carousel';
+import {BASE_URL} from '../../../5. Helper/settings';
 
 const responsive = {
     xxl: {
@@ -17,32 +18,24 @@ const responsive = {
         items: 3.5
     },
     md: {
-        breakpoint: { max: 1366, min: 1180 },
+        breakpoint: { max: 1366, min: 1080 },
         items: 3
     },
     md2: {
-        breakpoint: { max: 1180, min: 991 },
+        breakpoint: { max: 1080, min: 991 },
         items: 2.5
-    },
-    md3: {
-        breakpoint: { max: 991, min: 900 },
-        items: 3
     },
     sm: {
-        breakpoint: { max: 900, min: 775 },
-        items: 2.5
-    },
-    xs2: {
-        breakpoint: { max: 775, min: 650 },
-        items: 2.2
+        breakpoint: { max: 991, min: 720 },
+        items: 3
     },
     mobile: {
-        breakpoint: { max: 650, min: 530 },
-        items: 1.75
+        breakpoint: { max: 720, min: 500 },
+        items: 2
     },
     mobile2: {
-        breakpoint: { max: 530, min: 400 },
-        items: 1.25
+        breakpoint: { max: 500, min: 400 },
+        items: 1.5
     },
     mobile3: {
         breakpoint: { max: 400, min: 0 },
@@ -60,12 +53,19 @@ const MainCarousel = ({data}) => {
                 containerClass="mb-5 pb-4 pt-2"
             >
                 {data.map((item,idx) => (
-                    <Link to={`/product/${item.id}`} key={idx}>
+                    <Link
+                        key={idx}
+                        className="invisible-card"
+                        to={`/product/${item.product_id}`}
+                    >
                         <img
                             alt={item.name}
-                            src={item.image}
-                            className="img-fluid rounded shadow"
+                            className="img-fluid rounded"
+                            src={BASE_URL + item.product_image}
                         />
+                        <span className="product-title">
+                            {item.title}
+                        </span>
                     </Link>
                 ))}
             </Carousel>

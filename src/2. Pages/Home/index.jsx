@@ -31,12 +31,7 @@ const HomePage = () => {
 
                     <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
                         <NavLink
-                            to={{
-                                pathname: "/catalog",
-                                state: {
-                                    data: "PC"
-                                }
-                            }}
+                            to={`/catalog/pc`}
                             className="card w-responsive hover-up"
                         >
                             <div className="card-body text-center">
@@ -58,12 +53,7 @@ const HomePage = () => {
 
                     <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
                         <NavLink
-                            to={{
-                                pathname: "/catalog",
-                                state: {
-                                    data: "Playstation"
-                                }
-                            }}
+                            to={`/catalog/playstation`}
                             className="card w-responsive hover-up"
                         >
                             <div className="card-body text-center">

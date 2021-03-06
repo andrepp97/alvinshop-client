@@ -1,4 +1,25 @@
 /* CAROUSEL */
+.invisible-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: .25s;
+    margin-right: 8px;
+}
+.invisible-card:hover {
+    transform: translateY(-3px);
+}
+.invisible-card:hover .product-title {
+    color: #414141;
+}
+
+.product-title {
+    color: #707070;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
 .carousel-container {
     width: 100%;
     height: 100%;
@@ -32,6 +53,20 @@
     object-fit: cover;
     object-position: center;
 }
+
+.img-partner:hover img {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24);
+}
+.img-partner img {
+    min-width: 180px;
+    width: 20vw;
+    height: 58px;
+    padding: 4px;
+    margin: 0 12px;
+    object-fit: contain;
+    object-position: center;
+    transition: .2s;
+}
 /* CAROUSEL */
 
 
@@ -60,11 +95,14 @@
     }
 }
 
-@media only screen and (max-width: 400px) {
-    .img-partner {
+@media only screen and (max-width: 460px) {
+    .img-partner img {
         width: 100%;
-        height: 100%;
-        max-width: 335px;
-        max-height: 90px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .invisible-card {
+        margin-right: 0;
     }
 }

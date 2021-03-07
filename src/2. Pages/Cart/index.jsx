@@ -1,105 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { MDBAnimation } from 'mdbreact';
+import React, { useEffect, useContext } from 'react';
 import NumberFormat from 'react-number-format';
+import { MDBAnimation } from 'mdbreact';
+
 import CartItem from './components/CartItem';
+import Loader from '../../1. Components/Loader';
+import { CartContext } from '../../7. Context/CartContext';
 
 const UserCart = () => {
-    // STATE
-    const [data, setData] = useState([])
+    // CONTEXT
+    const {userCart, updateCart, deleteCart} = useContext(CartContext)
 
     // LIFECYCLE
     useEffect(() => {
         window.scrollTo(0,0)
-        setData([
-            {
-                id: 1,
-                name: 'Cyberpunk 2077',
-                price: 750000,
-                qty: 1,
-                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1rft.jpg'
-            },
-            {
-                id: 2,
-                name: 'Resident Evil 3',
-                price: 399000,
-                qty: 1,
-                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co22l7.jpg'
-            },
-            {
-                id: 3,
-                name: 'Hunting Simulator 2',
-                price: 175000,
-                qty: 1,
-                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co20m6.jpg'
-            },
-            {
-                id: 4,
-                name: 'Persona 5',
-                price: 350000,
-                qty: 1,
-                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r76.jpg'
-            },
-            {
-                id: 5,
-                name: 'Red Dead Redemption 2',
-                price: 400000,
-                qty: 1,
-                image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg'
-            },
-        ])
-    }, [])
+        console.log(userCart)
+    }, [userCart])
 
-    // FUNCTIONS
-    const onChangeQty = (val, idx) => {
-        if (val < 1) val = 1
-        let newData = [...data]
-        newData[idx].qty = parseInt(val)
-        this.setState({ data: newData })
-    }
-
+    // CALCULATE TOTAL
     const calculateTotal = () => {
         let res = 0
 
-        data.forEach(item => {
-            res += (item.price * item.qty)
+        userCart && userCart.forEach(item => {
+            res += (item.product_price - (item.product_price * item.product_discount / 100)) * item.quantity
         })
-
+        
         return res
     }
 
     // RENDER
-    return (
-        <MDBAnimation
-            type="fadeIn"
-            className="py-5 px-0 px-sm-3 px-md-2 px-lg-5"
-        >
-            <div className="container-fluid">
+    return !userCart
+    ? (
+        <div className="vh-50 d-flex align-items-center">
+            <Loader />
+        </div>
+    )
+    : (
+        <MDBAnimation type="fadeIn">
+            <div className="vh-100 container py-5">
+
+                <div className="text-center border-bottom py-3 my-5">
+                    <h4 className="h4-responsive text-uppercase">
+                        Shopping Cart
+                    </h4>
+                </div>
 
                 <div className="row">
 
                     <div className="col-md-8 mb-4">
                         <div className="card-body">
-                            <h4 className="h4-responsive text-uppercase">
-                                Your Items
-                            </h4>
+                            <h5 className="h5-responsive text-uppercase">
+                                <strong>{userCart && userCart.length}</strong> items
+                            </h5>
                             <hr/>
-                            {data ? data.map((row,idx) => (
-                                <CartItem
-                                    key={idx}    
-                                    item={row}
-                                    index={idx}
-                                    duration={idx*400}
-                                    editQty={onChangeQty}
-                                />
-                            )) : null}
+                            {
+                                userCart
+                                ? userCart.length
+                                    ? userCart.map((item,idx) => (
+                                        <CartItem
+                                            key={idx}
+                                            data={item}
+                                            updateCart={updateCart}
+                                            deleteCart={deleteCart}
+                                        />
+                                    ))
+                                    : <p>Your cart is empty</p>
+                                : null
+                            }
                         </div>
                     </div>
 
                     <div className="col-md-4 mb-5">
                         <div className="card-body">
-                            <h4 className="h4-responsive text-uppercase">
+                            <h5 className="h5-responsive text-uppercase">
                                 Total
-                            </h4>
+                            </h5>
                             <hr/>
                             <NumberFormat
                                 prefix={'Rp '}

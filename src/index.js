@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import AuthContextProvider from './7. Context/AuthContext';
+import CartContextProvider from './7. Context/CartContext';
 import SettingsContextProvider from './7. Context/SettingsContext';
 
 // CSS
@@ -18,7 +19,9 @@ ReactDOM.render(
     <BrowserRouter>
       <SettingsContextProvider>
         <AuthContextProvider>
-          <App />
+          <CartContextProvider>
+            <App />
+          </CartContextProvider>
         </AuthContextProvider>
       </SettingsContextProvider>
     </BrowserRouter>

@@ -21,6 +21,13 @@ code {
 
 
 /* ===== GLOBAL CLASSES ===== */
+.vh-100 {
+  min-height: 100vh;
+}
+.vh-50 {
+  min-height: 50vh;
+}
+
 .bg-main {
   background: #f9f9f9;
 }
@@ -44,25 +51,6 @@ code {
   background: #e0e0e0;
 }
 
-.btn-navbar {
-  border-radius: 0.125rem;
-  border: none;
-  outline: none;
-  padding: 4px 12px;
-  margin: 4px;
-  color: #000000;
-  font-size: 14px;
-  transition: .25s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-}
-
-.btn-navbar:hover {
-  color: #FFF;
-  background: #263238;
-}
 
 .spacing-1 {
   letter-spacing: 1px;

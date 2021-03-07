@@ -8,6 +8,7 @@ import {
     MDBDropdownToggle, MDBDropdownMenu,
     MDBDropdownItem,
 } from "mdbreact";
+import './navbar.css';
 
 import { AuthContext } from '../../7. Context/AuthContext';
 import { TOKEN_PREFIX, BASE_URL } from '../../5. Helper/settings';
@@ -16,7 +17,7 @@ import { TOKEN_PREFIX, BASE_URL } from '../../5. Helper/settings';
 import SearchModal from './components/SearchModal';
 import AuthModal from './components/AuthModal';
 
-const Navbar = ({settings, prefix}) => {
+const Navbar = ({settings, prefix, userCart}) => {
     // CONTEXT
     const {userState, dispatch} = useContext(AuthContext)
 
@@ -100,10 +101,11 @@ const Navbar = ({settings, prefix}) => {
                             <>
                                 <Link
                                     to='/cart'
-                                    onClick={() => setIsOpen(false)}
                                     className="btn-navbar"
+                                    onClick={() => setIsOpen(false)}
                                 >
                                     <MDBIcon icon="shopping-cart" />
+                                    {userCart && <span className="cart-badge">{userCart.length}</span>}
                                 </Link>
                                 <MDBNavItem>
                                     <MDBDropdown className="mx-1">

@@ -1,6 +1,7 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState, useContext, useCallback} from 'react';
+import {MDBAnimation, MDBInputGroup} from 'mdbreact';
 import {useParams} from 'react-router-dom';
-import {MDBAnimation} from 'mdbreact';
+import NumberFormat from 'react-number-format';
 import YouTube from 'react-youtube';
 import './style.css';
 
@@ -8,36 +9,26 @@ import './style.css';
 import Loader from '../../1. Components/Loader';
 import APIRequest from '../../4. Api/APIRequest';
 import {BASE_URL} from '../../5. Helper/settings';
-
-const data = {
-    id: 3,
-    name: "Tekken 7",
-    year: 2015,
-    publisher: "Bandai Namco Studios",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1w4f.jpg",
-    backdrop: "https://images5.alphacoders.com/843/thumb-1920-843147.jpg",
-    videoId: "kKLCwDg2JLA",
-    description: "Experience the epic conclusion of the Mishima clan and unravel the reasons behind each step of their ceaseless fight. Powered by Unreal Engine 4, TEKKEN 7 features stunning story-driven cinematic battles and intense duels that can be enjoyed with friends and rivals alike through innovative fight mechanics.",
-    genre: [
-        { id: 4, name: "Fighting" },
-        { id: 7, name: "Sport" }
-    ]
-}
+import {CartContext} from '../../7. Context/CartContext';
 
 const DetailProduk = () => {
     // PARAMS
     const {id} = useParams();
 
+    // CONTEXT
+    const { addToCart } = useContext(CartContext)
+
     // STATE
     const [loading, setLoading] = useState(true)
     const [details, setDetails] = useState(null)
+    const [jumlah, setJumlah] = useState(1)
 
     // CRUD
     const getProductDetail = useCallback(async () => {
         try {
             const res = await APIRequest.post('user/detailProduct', {id})
             const {data} = res.data
-            console.log('Detail produk', data)
+            console.log('Produk', data)
             setDetails(data)
         } catch (err) {
             console.log('Product Detail Error', err)
@@ -58,40 +49,79 @@ const DetailProduk = () => {
         event.target.pauseVideo();
     }
 
+    const handleJumlah = (value) => {
+        if (value > 0 && value <= details.stock) setJumlah(value)
+    }
+
+    const handleAddToCart = () => {
+        addToCart({
+            id: details.id,
+            jumlah
+        })
+    }
+
     // RENDER
     return loading
     ? <Loader />
     : (
         <MDBAnimation type="fadeIn" className="bg-main pb-5">
-            {/* <div
-                className="product-backdrop"
-                style={{ backgroundImage: `url(${data.backdrop})` }}
-            >
-                <div className="product-overlay" />
-            </div> */}
-
             <div className="container py-5">
 
                 <div className="row my-5">
-                    <div className="col-md-4 text-center">
+                    <div className="col-md-4">
                         <img
-                            src={BASE_URL + details.image[0].product_image}
-                            alt={data.name}
+                            alt={details.title}
                             className="img-fluid rounded product-img"
+                            src={BASE_URL + details.image[0].product_image}
                         />
-                        <div>
-                            <button className="btn btn-brown">
+                        {(details.discount || details.discount !== 0) && (
+                            <div>
+                                <small className="badge badge-danger">
+                                    {details.discount}%
+                                </small>
+                                <NumberFormat
+                                    prefix={'Rp '}
+                                    displayType={'text'}
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    value={details.price}
+                                    className="strike-text ml-1"
+                                />
+                            </div>
+                        )}
+                        <p className="product-price">
+                            <NumberFormat
+                                prefix={'Rp '}
+                                displayType={'text'}
+                                decimalSeparator=","
+                                thousandSeparator="."
+                                value={(details.price) - (details.price * details.discount / 100)}
+                            />
+                        </p>
+                        <div className="d-flex flex-column">
+                            <MDBInputGroup
+                                containerClassName="my-2"
+                                prepend="Qty"
+                                type="number"
+                                value={jumlah}
+                                className="font-weight-bold"
+                                onChange={e => handleJumlah(e.target.value)}
+                            />
+                            <button
+                                className="btn btn-indigo m-0"
+                                onClick={handleAddToCart}
+                            >
                                 <i className="fa fa-cart-plus mr-2" />
                                 Add To Cart
                             </button>
                         </div>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-8 mt-4 mt-md-0">
                         <h3 className="h3-responsive font-weight-bold opacity-70">
-                            {details.title} <small>({data.year})</small>
+                            {details.title} {details.tahun_rilis && <small>({details.tahun_rilis})</small>}
                         </h3>
                         <h5 className="h5-responsive opacity-80 mt-2">
-                            {data.publisher}
+                            {details.publisher}
                         </h5>
                         <p className="opacity-70 mt-3">
                             {details.description}

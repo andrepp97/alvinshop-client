@@ -1,71 +1,121 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
-import {
-    MDBIcon,
-    MDBDropdown,
-    MDBDropdownToggle,
-    MDBDropdownMenu,
-    MDBDropdownItem,
-    MDBAnimation
-} from 'mdbreact';
+import {MDBAnimation, MDBBtnGroup, MDBBtn, MDBIcon} from 'mdbreact';
+import {BASE_URL} from '../../../5. Helper/settings';
 
-const CartItem = ({ index, item, editQty, duration }) => {
+const CartItem = ({data, updateCart, deleteCart}) => {
+    // UPDATE QTY
+    const incrementQty = () => {
+        const body = {
+            id: data.product_id,
+            jumlah: data.quantity + 1
+        }
+        if (data.quantity + 1 <= data.product_stock) updateCart(body)
+    }
+    const decrementQty = () => {
+        const body = {
+            id: data.product_id,
+            jumlah: data.quantity - 1
+        }
+        if (data.quantity - 1 > 0) updateCart(body)
+    }
+
+    // RENDER
     return (
         <MDBAnimation
             reveal
             type="fadeInUp"
-            className="card mb-4 p-2"
+            className="mb-4"
         >
 
-            <div className="text-right d-block d-sm-none mb-n3" style={{zIndex: 999}}>
-                <MDBDropdown>
-                    <MDBDropdownToggle color="transparent" className="m-0 px-2 py-1">
-                        <MDBIcon icon="ellipsis-v" />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu basic>
-                        <MDBDropdownItem>Move to Favourites</MDBDropdownItem>
-                        <MDBDropdownItem>Remove</MDBDropdownItem>
-                    </MDBDropdownMenu>
-                </MDBDropdown>
-            </div>
+            <div className="card">
+                <div className="card-body">
 
-            <div className="row">
-                <div className="col-4 col-md-3 col-xl-2">
-                    <img src={item.image} alt="" className="img-fluid rounded" />
-                </div>
-                <div className="col-8 col-md-9 col-xl-10 d-flex flex-column">
-                    <NumberFormat
-                        prefix={'Rp '}
-                        value={item.price}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                        renderText={value => <span className="font-weight-bolder opacity-70">{value}</span>}
-                    />
-                    <div className="d-flex flex-md-row align-items-md-center flex-column mt-2">
-                        <div>{item.name}</div>
-                        <i className="fa fa-circle font-small opacity-80 d-none d-md-block mx-3" />
-                        <div className="d-flex align-items-center mt-3 mt-md-0">
-                            <span>Qty</span>
-                            <input
-                                min={0}
-                                type="number"
-                                className="form-control w-responsive ml-2"
-                                onChange={e => editQty(e.target.value, index)}
-                                value={item.qty}
+                    <div className="row">
+
+                        <div className="col-sm-5">
+                            <img
+                                src={BASE_URL + data.product_image}
+                                alt={data.product_title}
+                                className="img-fluid rounded"
                             />
                         </div>
+
+                        <div className="col-sm-7">
+
+                            <p className="font-weight-bold opacity-80 mb-2">
+                                {data.product_title}
+                            </p>
+                            {(data.product_discount || data.product_discount !== 0) && (
+                                <div>
+                                    <small className="badge badge-danger">
+                                        {data.product_discount}%
+                                    </small>
+                                    <NumberFormat
+                                        prefix={'Rp '}
+                                        displayType={'text'}
+                                        decimalSeparator=","
+                                        thousandSeparator="."
+                                        value={data.product_price}
+                                        className="strike-text ml-1"
+                                    />
+                                </div>
+                            )}
+                            <p className="product-price">
+                                <NumberFormat
+                                    prefix={'Rp '}
+                                    displayType={'text'}
+                                    decimalSeparator=","
+                                    thousandSeparator="."
+                                    value={(data.product_price) - (data.product_price * data.product_discount / 100)}
+                                />
+                            </p>
+
+                            <div className="row">
+                                <div className="col">
+                                    <MDBBtnGroup>
+                                        <MDBBtn
+                                            color="indigo"
+                                            onClick={decrementQty}
+                                            className="text-center px-3 py-1 m-0"
+                                        >
+                                            <MDBIcon icon="minus" />
+                                        </MDBBtn>
+                                        <input
+                                            type="text"
+                                            value={data.quantity}
+                                            className="form-control w-responsive text-center"
+                                        />
+                                        <MDBBtn
+                                            color="indigo"
+                                            onClick={incrementQty}
+                                            className="text-center px-3 py-1 m-0"
+                                        >
+                                            <MDBIcon icon="plus" />
+                                        </MDBBtn>
+                                    </MDBBtnGroup>
+                                </div>
+                                <div className="col d-flex justify-content-end">
+                                    <MDBBtn
+                                        color="red"
+                                        className="px-3 py-2 m-0"
+                                        onClick={() => deleteCart({
+                                            id: data.product_id,
+                                            name: data.product_title,
+                                        })}
+                                    >
+                                        <MDBIcon icon="trash" />
+                                    </MDBBtn>
+                                </div>
+                            </div>
+                            
+                        </div>
+
                     </div>
-                    <div className="d-none d-sm-block" style={{ position: 'absolute', bottom: 0, right: 12 }}>
-                        <button className="btn px-2 py-1 ml-0 mr-2">
-                            <MDBIcon far icon="heart" className="mr-2" />
-                            Move to Favourites
-                        </button>
-                        <button className="btn btn-red px-2 py-1 ml-0" onClick={() => console.log(item)}>
-                            <MDBIcon icon="trash" />
-                        </button>
-                    </div>
+
                 </div>
             </div>
+
         </MDBAnimation>
     );
 };

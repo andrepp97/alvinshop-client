@@ -35,7 +35,7 @@ const AuthModal = ({ isOpen, toggleAuth }) => {
     }
 
     // LOGIN FUNCTION
-    const onUserLogin = () => {
+    const onUserLogin = async () => {
         if (!loginValidation()) {
             setLoading(true)
 
@@ -51,6 +51,7 @@ const AuthModal = ({ isOpen, toggleAuth }) => {
                     type: 'LOGIN',
                     ...data.data
                 })
+                window.location.reload()
             })
             .catch(err => {
                 const res = err.response

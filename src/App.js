@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { setClientToken } from './4. Api/APIRequest';
 import { TOKEN_PREFIX } from './5. Helper/settings';
 import { AuthContext } from './7. Context/AuthContext';
+import { CartContext } from './7. Context/CartContext';
 import { SettingsContext } from './7. Context/SettingsContext';
 
 // COMPONENTS
@@ -14,20 +15,20 @@ import StickyWhatsapp from './1. Components/StickyWhatsapp';
 const App = () => {
   // CONTEXT
   const { userState, dispatch } = useContext(AuthContext)
+  const { userCart, getUserCart } = useContext(CartContext)
   const { getSettings, settings, settingsPrefix } = useContext(SettingsContext)
 
   // LIFECYCLE
   useEffect(() => {
-    const restoreToken = () => {
-      let userToken = JSON.parse(localStorage.getItem(TOKEN_PREFIX))
+    let userToken = JSON.parse(localStorage.getItem(TOKEN_PREFIX))
+
+    const restoreToken = async () => {
       if (userToken) {
-        setTimeout(() => {
-          setClientToken(userToken)
-          dispatch({
-            type: "LOGIN",
-            ...userToken
-          })
-        }, 1000);
+        setClientToken(userToken)
+        dispatch({
+          type: "LOGIN",
+          ...userToken
+        })
       } else {
         console.log('Unauthorized')
         dispatch({
@@ -38,14 +39,15 @@ const App = () => {
     
     getSettings()
     restoreToken()
-  }, [dispatch, getSettings])
+    if (userToken) getUserCart()
+  }, [dispatch, getSettings, getUserCart])
 
   // RENDER
   return userState.isLoading
   ? <LoadingScreen />
   : (
     <div>
-      <Navbar settings={settings} prefix={settingsPrefix} />
+      <Navbar settings={settings} prefix={settingsPrefix} userCart={userCart} />
       <Router />
       <Footer settings={settings} />
       <StickyWhatsapp settings={settings} />

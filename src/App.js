@@ -9,14 +9,15 @@ import { SettingsContext } from './7. Context/SettingsContext';
 import Router from './6. Routes/Router';
 import Navbar from './1. Components/Navbar';
 import Footer from './1. Components/Footer';
+import AuthModal from './1. Components/AuthModal';
 import LoadingScreen from './1. Components/LoadingScreen';
 import StickyWhatsapp from './1. Components/StickyWhatsapp';
 
 const App = () => {
   // CONTEXT
-  const { userState, dispatch } = useContext(AuthContext)
   const { userCart, getUserCart } = useContext(CartContext)
   const { getSettings, settings, settingsPrefix } = useContext(SettingsContext)
+  const { userState, dispatch, authOpen, toggleAuth } = useContext(AuthContext)
 
   // LIFECYCLE
   useEffect(() => {
@@ -47,7 +48,16 @@ const App = () => {
   ? <LoadingScreen />
   : (
     <div>
-      <Navbar settings={settings} prefix={settingsPrefix} userCart={userCart} />
+      <AuthModal
+        isOpen={authOpen}
+        toggleAuth={toggleAuth}
+      />
+      <Navbar
+        settings={settings}
+        prefix={settingsPrefix}
+        toggleAuth={toggleAuth}
+        userCart={userCart}
+      />
       <Router />
       <Footer settings={settings} />
       <StickyWhatsapp settings={settings} />

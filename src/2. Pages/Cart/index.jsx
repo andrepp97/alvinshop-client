@@ -1,14 +1,18 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NumberFormat from 'react-number-format';
-import { MDBAnimation } from 'mdbreact';
+import { MDBAnimation, MDBBtn } from 'mdbreact';
 
 import CartItem from './components/CartItem';
+import CheckoutDialog from './components/CheckoutDialog';
 import Loader from '../../1. Components/Loader';
 import { CartContext } from '../../7. Context/CartContext';
 
 const UserCart = () => {
     // CONTEXT
     const {userCart, updateCart, deleteCart} = useContext(CartContext)
+
+    // STATE
+    const [isCheckout, setIsCheckout] = useState(false)
 
     // LIFECYCLE
     useEffect(() => {
@@ -78,12 +82,27 @@ const UserCart = () => {
                             <NumberFormat
                                 prefix={'Rp '}
                                 displayType={'text'}
-                                thousandSeparator={true}
+                                decimalSeparator=","
+                                thousandSeparator="."
                                 value={calculateTotal()}
-                                renderText={value => <h5 className="h5-responsive font-weight-bold opacity-70">{value}</h5>}
+                                renderText={value => <h4 className="h4-responsive font-weight-bold opacity-70">{value}</h4>}
                             />
+                            <MDBBtn
+                                color="indigo"
+                                className="w-100 m-0 mt-5"
+                                hidden={!userCart || !userCart.length}
+                                onClick={() => setIsCheckout(true)}
+                            >
+                                Checkout
+                            </MDBBtn>
                         </div>
                     </div>
+
+                    {/* DIALOGS */}
+                    <CheckoutDialog
+                        isOpen={isCheckout}
+                        toggleCheckout={() => setIsCheckout(false)}
+                    />
 
                 </div>
 

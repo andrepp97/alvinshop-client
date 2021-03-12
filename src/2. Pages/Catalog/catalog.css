@@ -1,3 +1,15 @@
+/* GENERAL */
+#genre-section {
+    display: flex;
+    overflow: auto;
+    padding: 8px 0;
+}
+
+#btn-genre {
+    min-width: 140px;
+}
+
+
 /* CAROUSEL */
 .invisible-card {
     display: flex;
@@ -68,23 +80,6 @@
     transition: .2s;
 }
 /* CAROUSEL */
-
-
-/* NODES */
-.node-item {
-    cursor: pointer;
-    margin: 4px 0;
-    transition: .25;
-    border-radius: 4px;
-}
-.node-item:hover {
-    background: #dce2f1;
-}
-.node-item-active {
-    color: #FFF;
-    background: #1C2331 !important;
-}
-/* NODES */
 
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { MDBAnimation } from 'mdbreact';
 import Carousel from 'react-multi-carousel';
-import {BASE_URL} from '../../../5. Helper/settings';
+
+import ProductCard from '../../../1. Components/ProductCard';
 
 const responsive = {
     xxl: {
@@ -52,22 +52,7 @@ const MainCarousel = ({data}) => {
                 responsive={responsive}
                 containerClass="mb-5 pb-4 pt-2"
             >
-                {data.map((item,idx) => (
-                    <Link
-                        key={idx}
-                        className="invisible-card"
-                        to={`/product/${item.product_id}`}
-                    >
-                        <img
-                            alt={item.name}
-                            className="img-fluid rounded"
-                            src={BASE_URL + item.product_image}
-                        />
-                        <span className="product-title">
-                            {item.title}
-                        </span>
-                    </Link>
-                ))}
+                {data.map((item,idx) => <ProductCard key={idx} item={item} />)}
             </Carousel>
         </MDBAnimation>
     );

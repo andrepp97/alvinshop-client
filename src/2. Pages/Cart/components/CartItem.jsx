@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
 import {MDBAnimation, MDBBtnGroup, MDBBtn, MDBIcon} from 'mdbreact';
 import {BASE_URL} from '../../../5. Helper/settings';
@@ -43,9 +44,12 @@ const CartItem = ({data, updateCart, deleteCart}) => {
 
                         <div className="col-sm-7">
 
-                            <p className="font-weight-bold opacity-80 mb-2">
+                            <Link
+                                to={`/product/${data.product_id}`}
+                                className="product-title"
+                            >
                                 {data.product_title}
-                            </p>
+                            </Link>
                             {(data.product_discount || data.product_discount !== 0) && (
                                 <div>
                                     <small className="badge badge-danger">

@@ -28,7 +28,6 @@ const DetailProduk = () => {
         try {
             const res = await APIRequest.post('user/detailProduct', {id})
             const {data} = res.data
-            console.log('Produk', data)
             setDetails(data)
         } catch (err) {
             console.log('Product Detail Error', err)
@@ -100,7 +99,7 @@ const DetailProduk = () => {
                         </p>
                         <div className="d-flex flex-column">
                             <MDBInputGroup
-                                containerClassName="my-2"
+                                containerClassName="mb-3"
                                 prepend="Qty"
                                 type="number"
                                 value={jumlah}

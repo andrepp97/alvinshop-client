@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import {
     MDBIcon, MDBNavbar,
@@ -15,21 +15,17 @@ import { TOKEN_PREFIX, BASE_URL } from '../../5. Helper/settings';
 
 // COMPONENTS
 import SearchModal from './components/SearchModal';
-import AuthModal from './components/AuthModal';
 
-const Navbar = ({settings, prefix, userCart}) => {
+const Navbar = (props) => {
+    // PROPS
+    const {settings, prefix, userCart, toggleAuth} = props
+
     // CONTEXT
     const {userState, dispatch} = useContext(AuthContext)
 
     // STATE
     const [isOpen, setIsOpen] = useState(false)
-    const [authOpen, setAuthOpen] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
-
-    // LIFECYCLE
-    useEffect(() => {
-        if (userState.userToken) setAuthOpen(false)
-    }, [userState.userToken])
 
     // TOGGLE MODAL
     const toggleCollapse = () => {
@@ -38,10 +34,6 @@ const Navbar = ({settings, prefix, userCart}) => {
 
     const toggleSearch = () => {
         setSearchOpen(!searchOpen)
-    }
-
-    const toggleAuth = () => {
-        setAuthOpen(!authOpen)
     }
 
     // LOGOUT FUNCTION
@@ -86,7 +78,6 @@ const Navbar = ({settings, prefix, userCart}) => {
 
                         {/* MODAL */}
                         <SearchModal isOpen={searchOpen} toggleSearch={toggleSearch} />
-                        <AuthModal isOpen={authOpen} toggleAuth={toggleAuth} />
 
                         {
                             !userState.userToken
@@ -105,7 +96,17 @@ const Navbar = ({settings, prefix, userCart}) => {
                                     onClick={() => setIsOpen(false)}
                                 >
                                     <MDBIcon icon="shopping-cart" />
-                                    {userCart && <span className="cart-badge">{userCart.length}</span>}
+                                    {
+                                        userCart
+                                        ? userCart.length
+                                            ? (
+                                                <span className="cart-badge">
+                                                    {userCart.length}
+                                                </span>
+                                            )
+                                            : null
+                                        : null
+                                    }
                                 </Link>
                                 <MDBNavItem>
                                     <MDBDropdown className="mx-1">

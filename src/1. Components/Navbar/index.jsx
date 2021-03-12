@@ -40,6 +40,7 @@ const Navbar = (props) => {
     const onUserLogout = () => {
         dispatch({ type: 'LOGOUT' })
         localStorage.removeItem(TOKEN_PREFIX)
+        window.location.reload()
     }
     
     // RENDER

@@ -1,10 +1,14 @@
-import React, { useState, createContext, useCallback } from 'react'
+import React, { useState, createContext, useContext, useCallback } from 'react'
 import Swal from 'sweetalert2';
 import APIRequest from '../4. Api/APIRequest';
+import {AuthContext} from './AuthContext';
 
 export const CartContext = createContext();
 
 const CartContextProvider = (props) => {
+    // AUTH
+    const { toggleAuth } = useContext(AuthContext)
+
     // STATE
     const [userCart, setUserCart] = useState(null)
 
@@ -40,19 +44,24 @@ const CartContextProvider = (props) => {
             })
         })
         .catch(err => {
-            if (err.response.data.message === 'product is already added') {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'This product is already in your cart',
-                    showCancelButton: true,
-                    cancelButtonText: 'Close',
-                    confirmButtonText: 'My Cart',
-                })
-                .then(result => {
-                    if (result.value) window.location.pathname = '/cart'
-                })
+            if (err.response) {
+                if (err.response.status === 400) toggleAuth()
+                if (err.response.data.message === 'product is already added') {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'This product is already in your cart',
+                        showCancelButton: true,
+                        cancelButtonText: 'Close',
+                        confirmButtonText: 'My Cart',
+                    })
+                    .then(result => {
+                        if (result.value) window.location.pathname = '/cart'
+                    })
+                }
+                console.log(err.response)
+            } else {
+                console.log(err)
             }
-            console.log(err.response)
         })
     }
 

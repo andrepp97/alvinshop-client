@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useState, useReducer, createContext } from 'react';
 
 export const AuthContext = createContext();
 
@@ -38,9 +38,25 @@ const AuthContextProvider = (props) => {
     // USER STATE FOR GLOBAL USAGE
     const [userState, dispatch] = useReducer(userReducer, initialState)
 
+    // STATE
+    const [authOpen, setAuthOpen] = useState(false)
+
+    // TOGGLE AUTH
+    const toggleAuth = () => {
+        setAuthOpen(!authOpen)
+    }
+
+    // VALUES
+    const values = {
+        userState,
+        dispatch,
+        authOpen,
+        toggleAuth,
+    }
+
     // RENDER
     return (
-        <AuthContext.Provider value={{userState, dispatch}}>
+        <AuthContext.Provider value={values}>
             {props.children}
         </AuthContext.Provider>
     );

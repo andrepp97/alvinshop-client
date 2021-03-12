@@ -58,6 +58,10 @@ code {
 .spacing-2 {
   letter-spacing: 2px;
 }
+
+.pointer-cursor {
+  cursor: pointer;
+}
 /* ===== GLOBAL CLASSES ===== */
 
 

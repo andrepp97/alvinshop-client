@@ -5,8 +5,8 @@ import Swal from 'sweetalert2';
 import './auth.css';
 
 import { AuthContext } from '../../7. Context/AuthContext';
+import AuthModal from '../../1. Components/AuthModal';
 import APIRequest from '../../4. Api/APIRequest';
-import AuthModal from '../../1. Components/Navbar/components/AuthModal';
 
 const Signup = () => {
     // CONTEXT

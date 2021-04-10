@@ -45,7 +45,7 @@ const SearchModal = ({ isOpen, toggleSearch }) => {
         } else {
             didMount.current = true
         }
-    }, [onSearch])
+    }, [onSearch, text])
 
     // RENDER
     return (
@@ -75,25 +75,37 @@ const SearchModal = ({ isOpen, toggleSearch }) => {
                     {
                         loading
                             ? <Loader />
-                            : result && result.length
-                                ? result.map(item => (
-                                    <div id={item.product_id} className="col-6">
-                                        <a
-                                            className="invisible-card"
-                                            href={`/product/${item.product_id}`}
-                                        >
-                                            <img
-                                                alt={item.name}
-                                                className="img-fluid rounded"
-                                                src={BASE_URL + item.product_image}
-                                            />
-                                            <span className="product-title">
-                                                {item.title}
-                                            </span>
-                                        </a>
+                            : result
+                                ? result.length
+                                    ? result.map(item => (
+                                        <div id={item.product_id} className="col-6">
+                                            <a
+                                                className="invisible-card"
+                                                href={`/product/${item.product_id}`}
+                                            >
+                                                <img
+                                                    alt={item.name}
+                                                    className="img-fluid rounded"
+                                                    src={BASE_URL + item.product_image}
+                                                />
+                                                <span className="product-title">
+                                                    {item.title}
+                                                </span>
+                                            </a>
+                                        </div>
+                                    ))
+                                    : (
+                                        <div className="col">
+                                            <p>No Result</p>
+                                        </div>
+                                    )
+                                : (
+                                    <div className="col">
+                                        <p className="opacity-60">
+                                            Try typing 'Cyberpunk'
+                                        </p>
                                     </div>
-                                ))
-                                : null
+                                )
                     }
                 </div>
 

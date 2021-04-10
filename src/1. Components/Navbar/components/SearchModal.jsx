@@ -36,7 +36,7 @@ const SearchModal = ({ isOpen, toggleSearch }) => {
 
     // LIFECYCLE
     useEffect(() => {
-        if (didMount) {
+        if (didMount && text) {
             const debounceFunction = setTimeout(() => {
                 onSearch()
             }, 1000)

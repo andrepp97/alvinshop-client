@@ -14,55 +14,55 @@ import LoadingScreen from './1. Components/LoadingScreen';
 import StickyWhatsapp from './1. Components/StickyWhatsapp';
 
 const App = () => {
-  // CONTEXT
-  const { userCart, getUserCart } = useContext(CartContext)
-  const { getSettings, settings, settingsPrefix } = useContext(SettingsContext)
-  const { userState, dispatch, authOpen, toggleAuth } = useContext(AuthContext)
+    // CONTEXT
+    const { userCart, getUserCart } = useContext(CartContext)
+    const { getSettings, settings, settingsPrefix } = useContext(SettingsContext)
+    const { userState, dispatch, authOpen, toggleAuth } = useContext(AuthContext)
 
-  // LIFECYCLE
-  useEffect(() => {
-    let userToken = JSON.parse(localStorage.getItem(TOKEN_PREFIX))
+    // LIFECYCLE
+    useEffect(() => {
+        let userToken = JSON.parse(localStorage.getItem(TOKEN_PREFIX))
 
-    const restoreToken = async () => {
-      if (userToken) {
-        setClientToken(userToken)
-        dispatch({
-          type: "LOGIN",
-          ...userToken
-        })
-      } else {
-        console.log('Unauthorized')
-        dispatch({
-          type: "LOGOUT"
-        })
-      }
-    }
-    
-    getSettings()
-    restoreToken()
-    if (userToken) getUserCart()
-  }, [dispatch, getSettings, getUserCart])
+        const restoreToken = async () => {
+            if (userToken) {
+                setClientToken(userToken)
+                dispatch({
+                    type: "LOGIN",
+                    ...userToken
+                })
+            } else {
+                console.log('Unauthorized')
+                dispatch({
+                    type: "LOGOUT"
+                })
+            }
+        }
 
-  // RENDER
-  return userState.isLoading
-  ? <LoadingScreen />
-  : (
-    <div>
-      <AuthModal
-        isOpen={authOpen}
-        toggleAuth={toggleAuth}
-      />
-      <Navbar
-        settings={settings}
-        prefix={settingsPrefix}
-        toggleAuth={toggleAuth}
-        userCart={userCart}
-      />
-      <Router />
-      <Footer settings={settings} />
-      <StickyWhatsapp settings={settings} />
-    </div>
-  );
+        getSettings()
+        restoreToken()
+        if (userToken) getUserCart()
+    }, [dispatch, getSettings, getUserCart])
+
+    // RENDER
+    return userState.isLoading
+        ? <LoadingScreen />
+        : (
+            <div>
+                <AuthModal
+                    isOpen={authOpen}
+                    toggleAuth={toggleAuth}
+                />
+                <Navbar
+                    settings={settings}
+                    prefix={settingsPrefix}
+                    toggleAuth={toggleAuth}
+                    userCart={userCart}
+                />
+                <Router />
+                <Footer settings={settings} />
+                <StickyWhatsapp settings={settings} />
+            </div>
+        );
 };
 
 export default App;

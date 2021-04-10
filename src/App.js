@@ -31,7 +31,7 @@ const App = () => {
                     ...userToken
                 })
             } else {
-                console.log('Unauthorized')
+                // console.log('Unauthorized')
                 dispatch({
                     type: "LOGOUT"
                 })

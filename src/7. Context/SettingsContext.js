@@ -18,6 +18,7 @@ const SettingsContextProvider = (props) => {
         } else {
             APIRequest.get('user/getSettings')
             .then(({data}) => {
+                console.log('Get Setting', data)
                 setSettings(data.data.data)
                 setSettingsPrefix(data.data.prefix)
                 localStorage.setItem(SETTINGS_PREFIX, JSON.stringify(data.data))

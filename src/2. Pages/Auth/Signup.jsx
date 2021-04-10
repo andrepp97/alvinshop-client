@@ -7,6 +7,7 @@ import './auth.css';
 import { AuthContext } from '../../7. Context/AuthContext';
 import AuthModal from '../../1. Components/AuthModal';
 import APIRequest from '../../4. Api/APIRequest';
+import Logo from '../../3. Assets/img/logo/logo3.jpeg';
 
 const Signup = () => {
     // CONTEXT
@@ -52,78 +53,88 @@ const Signup = () => {
             }
 
             APIRequest.post('user/register', body)
-            .then(() => {
-                Swal.fire({
-                    title: "Successfully Registered",
-                    text: "You can now login as " + username,
-                    icon: "success",
-                    didClose: () => setOpenAuth(true)
+                .then(() => {
+                    Swal.fire({
+                        title: "Successfully Registered",
+                        text: "You can now login as " + username,
+                        icon: "success",
+                        didClose: () => setOpenAuth(true)
+                    })
                 })
-            })
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false))
+                .catch(err => console.log(err))
+                .finally(() => setLoading(false))
         }
     }
-    
+
     // RENDER
     return userState.userToken
-    ? <Redirect to='/' />
-    : (
-        <div id="page-wrapper" className="d-flex align-items-center justify-content-center">
+        ? <Redirect to='/' />
+        : (
+            <div id="page-wrapper" className="d-flex align-items-center justify-content-center">
 
-            <AuthModal isOpen={openAuth} toggleAuth={() => setOpenAuth(false)} />
+                <AuthModal isOpen={openAuth} toggleAuth={() => setOpenAuth(false)} />
 
-            <div className="card-auth shadow mt-n5">
-                <h4 className="h4-responsive text-center text-uppercase">
-                    Signup
-                </h4>
+                <div className="card-auth shadow mt-n5">
+                    <h4 className="h4-responsive text-center text-uppercase">
+                        Signup
+                    </h4>
 
-                <hr/>
+                    <hr />
 
-                <div>
-                    <MDBInput
-                        outline
-                        label="Username"
-                        icon="user"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                    />
-                    <MDBInput
-                        outline
-                        label="Email"
-                        icon="envelope"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <MDBInput
-                        outline
-                        label="Password"
-                        type="password"
-                        icon="key"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <MDBInput
-                        outline
-                        label="Confirm Password"
-                        type="password"
-                        icon="lock"
-                        value={password2}
-                        onChange={e => setPassword2(e.target.value)}
-                    />
-                    <div className="text-center">
-                        <button
-                            className="btn btn-indigo py-2"
-                            onClick={onUserSignup}
-                            disabled={loading}
-                        >
-                            {loading ? <div className="spinner-border spinner-border-sm" role="status" /> : "Signup"}
-                        </button>
+                    <div className="row">
+                        <div className="col d-none d-lg-block">
+                            <img
+                                className="img-fluid"
+                                src={Logo}
+                                alt=""
+                            />
+                        </div>
+                        <div className="col">
+                            <MDBInput
+                                outline
+                                label="Username"
+                                icon="user"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                            <MDBInput
+                                outline
+                                label="Email"
+                                icon="envelope"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                            />
+                            <MDBInput
+                                outline
+                                label="Password"
+                                type="password"
+                                icon="key"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <MDBInput
+                                outline
+                                label="Confirm Password"
+                                type="password"
+                                icon="lock"
+                                value={password2}
+                                onChange={e => setPassword2(e.target.value)}
+                            />
+                            <div className="text-center">
+                                <button
+                                    className="btn btn-block btn-indigo py-2"
+                                    onClick={onUserSignup}
+                                    disabled={loading}
+                                >
+                                    {loading ? <div className="spinner-border spinner-border-sm" role="status" /> : "Signup"}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
-    );
+        );
 };
 
 export default Signup;

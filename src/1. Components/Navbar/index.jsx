@@ -18,10 +18,10 @@ import SearchModal from './components/SearchModal';
 
 const Navbar = (props) => {
     // PROPS
-    const {settings, prefix, userCart, toggleAuth} = props
+    const { settings, prefix, userCart, toggleAuth } = props
 
     // CONTEXT
-    const {userState, dispatch} = useContext(AuthContext)
+    const { userState, dispatch } = useContext(AuthContext)
 
     // STATE
     const [isOpen, setIsOpen] = useState(false)
@@ -42,7 +42,7 @@ const Navbar = (props) => {
         localStorage.removeItem(TOKEN_PREFIX)
         window.location.reload()
     }
-    
+
     // RENDER
     return (
         <MDBNavbar
@@ -59,7 +59,7 @@ const Navbar = (props) => {
                         <img
                             src={settings ? BASE_URL + prefix + '/' + settings.icon_shop : null}
                             alt={settings ? settings.name : ""}
-                            height={32}
+                            height={34}
                         />
                     </Link>
                 </MDBNavbarBrand>
@@ -74,7 +74,9 @@ const Navbar = (props) => {
                             onClick={toggleSearch}
                         >
                             <MDBIcon icon="search" />
-                            <small className="d-md-none ml-2">Search</small>
+                            <small className="d-md-none ml-2">
+                                Search
+                            </small>
                         </button>
 
                         {/* MODAL */}
@@ -82,48 +84,48 @@ const Navbar = (props) => {
 
                         {
                             !userState.userToken
-                            ?
+                                ?
                                 <button
                                     className='btn-navbar'
                                     onClick={toggleAuth}
                                 >
                                     Login / Signup
                                 </button>
-                            :
-                            <>
-                                <Link
-                                    to='/cart'
-                                    className="btn-navbar"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <MDBIcon icon="shopping-cart" />
-                                    {
-                                        userCart
-                                        ? userCart.length
-                                            ? (
-                                                <span className="cart-badge">
-                                                    {userCart.length}
-                                                </span>
-                                            )
-                                            : null
-                                        : null
-                                    }
-                                </Link>
-                                <MDBNavItem>
-                                    <MDBDropdown className="mx-1">
-                                        <MDBDropdownToggle nav>
-                                            <MDBIcon icon="user-circle" />
-                                            <small className="ml-2">{userState.userName}</small>
-                                        </MDBDropdownToggle>
-                                        <MDBDropdownMenu>
-                                            <MDBDropdownItem onClick={onUserLogout}>
-                                                <MDBIcon icon="sign-out-alt" className="mr-2" />
+                                :
+                                <>
+                                    <Link
+                                        to='/cart'
+                                        className="btn-navbar"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        <MDBIcon icon="shopping-cart" />
+                                        {
+                                            userCart
+                                                ? userCart.length
+                                                    ? (
+                                                        <span className="cart-badge">
+                                                            {userCart.length}
+                                                        </span>
+                                                    )
+                                                    : null
+                                                : null
+                                        }
+                                    </Link>
+                                    <MDBNavItem>
+                                        <MDBDropdown className="mx-1">
+                                            <MDBDropdownToggle nav>
+                                                <MDBIcon icon="user-circle" />
+                                                <small className="ml-2">{userState.userName}</small>
+                                            </MDBDropdownToggle>
+                                            <MDBDropdownMenu>
+                                                <MDBDropdownItem onClick={onUserLogout}>
+                                                    <MDBIcon icon="sign-out-alt" className="mr-2" />
                                                 Logout
                                             </MDBDropdownItem>
-                                        </MDBDropdownMenu>
-                                    </MDBDropdown>
-                                </MDBNavItem>
-                            </>
+                                            </MDBDropdownMenu>
+                                        </MDBDropdown>
+                                    </MDBNavItem>
+                                </>
                         }
                     </MDBNavbarNav>
                 </MDBCollapse>

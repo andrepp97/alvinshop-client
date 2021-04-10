@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap');
 
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #c4c4c4;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #8c8c8c;
+    border: 2px solid #c4c4c4;
+    border-radius: 20px;
+}
+
+
 * {
   font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', sans-serif;
 }
@@ -26,6 +44,11 @@ code {
 }
 .vh-50 {
   min-height: 50vh;
+}
+
+.my-6 {
+    margin-top: 64px;
+    margin-bottom: 64px;
 }
 
 .bg-main {
@@ -61,6 +84,11 @@ code {
 
 .pointer-cursor {
   cursor: pointer;
+}
+
+
+.list-group-item.active {
+    background-color: #3F51B5 !important;
 }
 /* ===== GLOBAL CLASSES ===== */
 

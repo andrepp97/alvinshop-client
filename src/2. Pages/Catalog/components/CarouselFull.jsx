@@ -19,45 +19,45 @@ const MainCarousel = () => {
     // GET BANNER
     const getBannerData = () => {
         APIRequest.get('user/banner')
-        .then(({data}) => setData(data.data))
-        .catch(err => console.log(err))
-        .finally(() => setLoading(false))
+            .then(({ data }) => setData(data.data))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
     }
 
     // LIFECYCLE
     useEffect(() => {
         getBannerData()
     }, [])
-    
+
     // RENDER
     return loading
-    ? <Loader />
-    : (
-        <Carousel
-            infinite
-            autoPlay
-            autoPlaySpeed={4000}
-            showDots={true}
-            draggable={true}
-            responsive={responsive}
-            containerClass="carousel-container"
-        >
-            {data.map((item,idx) => (
-                <a
-                    key={idx}
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img
-                        alt={item.banner_name}
-                        className="carousel-img"
-                        src={BASE_URL + item.banner_image}
-                    />
-                </a>
-            ))}
-        </Carousel>
-    );
+        ? <Loader />
+        : (
+            <Carousel
+                infinite
+                autoPlay
+                autoPlaySpeed={4000}
+                showDots={true}
+                draggable={true}
+                responsive={responsive}
+                containerClass="carousel-container"
+            >
+                {data.map((item, idx) => (
+                    <a
+                        key={idx}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            alt={item.banner_name}
+                            className="carousel-img"
+                            src={BASE_URL + item.banner_image}
+                        />
+                    </a>
+                ))}
+            </Carousel>
+        );
 };
 
 export default MainCarousel;

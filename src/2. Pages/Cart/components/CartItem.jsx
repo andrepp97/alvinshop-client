@@ -1,25 +1,37 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import NumberFormat from 'react-number-format';
-import {MDBAnimation, MDBBtnGroup, MDBBtn, MDBIcon} from 'mdbreact';
-import {BASE_URL} from '../../../5. Helper/settings';
+import { Link } from 'react-router-dom';
+import { MDBAnimation, MDBBtnGroup, MDBBtn, MDBIcon } from 'mdbreact';
+import { BASE_URL } from '../../../5. Helper/settings';
 
-const CartItem = ({data, updateCart, deleteCart}) => {
+const CartItem = ({ data, updateCart, deleteCart }) => {
+    // STATE
+    const [jumlah, setJumlah] = useState(data.quantity)
+
     // UPDATE QTY
     const incrementQty = () => {
-        const body = {
-            id: data.product_id,
-            jumlah: data.quantity + 1
-        }
-        if (data.quantity + 1 <= data.product_stock) updateCart(body)
+        const temp = jumlah + 1
+        if (temp <= data.product_stock) setJumlah(temp)
     }
     const decrementQty = () => {
-        const body = {
-            id: data.product_id,
-            jumlah: data.quantity - 1
-        }
-        if (data.quantity - 1 > 0) updateCart(body)
+        const temp = jumlah - 1
+        if (temp > 0) setJumlah(temp)
     }
+
+    // LIFECYCLE
+    useEffect(() => {
+        if (jumlah !== data.quantity) {
+            const debounceFunction = setTimeout(() => {
+                const body = {
+                    jumlah,
+                    id: data.product_id,
+                }
+                updateCart(body)
+            }, 1000)
+            
+            return () => clearTimeout(debounceFunction)
+        }
+    }, [data, jumlah, updateCart])
 
     // RENDER
     return (
@@ -86,8 +98,9 @@ const CartItem = ({data, updateCart, deleteCart}) => {
                                             <MDBIcon icon="minus" />
                                         </MDBBtn>
                                         <input
+                                            disabled
                                             type="text"
-                                            value={data.quantity}
+                                            value={jumlah}
                                             className="form-control w-responsive text-center"
                                         />
                                         <MDBBtn
@@ -112,7 +125,7 @@ const CartItem = ({data, updateCart, deleteCart}) => {
                                     </MDBBtn>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </div>

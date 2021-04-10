@@ -1,12 +1,18 @@
 .card-auth {
-    width: 50vw;
+    width: 45vw;
     padding: 3rem;
     transition: .25s;
     background: #FFF;
 }
 
+@media only screen and (max-width: 1600px) {
+    .card-auth {
+        width: 60vw;
+        padding: 2.5rem;
+    }
+}
 
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 1200px) {
     .card-auth {
         width: 75vw;
         padding: 2.5rem;

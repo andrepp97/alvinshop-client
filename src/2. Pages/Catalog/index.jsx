@@ -18,7 +18,7 @@ import APIRequest from '../../4. Api/APIRequest';
 
 const Catalog = () => {
     // PARAM
-    const {key} = useParams()
+    const { key } = useParams()
 
     // STATE
     const [recommended, setRecommended] = useState(null)
@@ -34,7 +34,7 @@ const Catalog = () => {
         try {
             const query = { device_id: key }
             const res = await APIRequest.get('user/getListFilter', { params: query })
-            const {data} = res.data
+            const { data } = res.data
             setCategories(data.category)
             setGenres(data.genre)
         } catch (err) {
@@ -49,7 +49,8 @@ const Catalog = () => {
                 category_id: selectedCategory,
             }
             const res = await APIRequest.post('user/getProductByGenreAndCategory', body)
-            const {data} = res.data
+            const { data } = res.data
+            console.log('Hasil Filter', data)
             setProducts(data)
         } catch (err) {
             console.log('Error Product by Filters', err)
@@ -60,7 +61,7 @@ const Catalog = () => {
         try {
             const res = await APIRequest.get('user/recommendProduct')
             // console.log('Recommended', res.data.data)
-            const {data} = res.data
+            const { data } = res.data
             setRecommended(data)
         } catch (err) {
             console.log('Error Recommended', err)
@@ -71,7 +72,7 @@ const Catalog = () => {
         try {
             const res = await APIRequest.get('user/todayOffer')
             // console.log('Todays Offer', res.data.data)
-            const {data} = res.data
+            const { data } = res.data
             setOffer(data)
         } catch (err) {
             console.log('Error Today Offer', err)
@@ -80,17 +81,23 @@ const Catalog = () => {
 
     // LIFECYCLE
     useEffect(() => {
-        getRecommended()
-        getOffer()
         getFilters()
+    }, [getFilters])
+
+    useEffect(() => {
         getProductByFilters()
-    }, [getFilters, getProductByFilters])
+    }, [getProductByFilters])
+
+    useEffect(() => {
+        getOffer()
+        getRecommended()
+    }, [])
 
     // RENDER
     return (
         <MDBAnimation type="fadeIn">
 
-            <CarouselFull/>
+            <CarouselFull />
 
             <div className="container-fluid pb-5 mt-5 px-4 px-md-5">
 
@@ -103,7 +110,7 @@ const Catalog = () => {
                                 <p className="font-weight-bold spacing-1 opacity-80">
                                     CATEGORY
                                 </p>
-                                <hr/>
+                                <hr />
                                 <div className="list-group">
                                     <MDBListGroup>
                                         {categories.map(item => (
@@ -137,7 +144,7 @@ const Catalog = () => {
                         {offer ? <Carousel data={offer} /> : <Loader />}
 
 
-                        <div className="mb-5 pb-4">
+                        <div className="my-6">
                             <div
                                 id="genre-section"
                                 className="border-top border-bottom mb-3"
@@ -158,17 +165,21 @@ const Catalog = () => {
                             <div className='row'>
                                 {
                                     products
-                                    ? products.length
-                                        ? products.map(product => (
-                                            <div
-                                                key={product.product_id}
-                                                className="col-sm-6 col-md-4 col-xl-3"
-                                            >
-                                                <ProductCard item={product} />
-                                            </div>
-                                        ))
-                                        : <p>No Result</p>
-                                    : <Loader />
+                                        ? products.length
+                                            ? products.map(product => (
+                                                <div
+                                                    key={product.product_id}
+                                                    className="col-sm-6 col-md-4 col-xl-3"
+                                                >
+                                                    <ProductCard item={product} />
+                                                </div>
+                                            ))
+                                            : (
+                                                <div className="col">
+                                                    <p>No Result</p>
+                                                </div>
+                                            )
+                                        : <Loader />
                                 }
                             </div>
                         </div>

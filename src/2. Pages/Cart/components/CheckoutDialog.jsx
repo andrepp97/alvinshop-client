@@ -4,9 +4,22 @@ import {
     MDBModalBody,
 } from 'mdbreact';
 
+const rekening = [
+    {
+        bank: 'BCA',
+        name: 'Evera Shop',
+        number: '3529090123',
+    },
+    {
+        bank: 'Mandiri',
+        name: 'Evera Shop',
+        number: '112121212',
+    },
+]
+
 const CheckoutDialog = (props) => {
     // PROPS
-    const {isOpen, toggleCheckout} = props
+    const { isOpen, toggleCheckout } = props
 
     // RENDER
     return (
@@ -19,9 +32,21 @@ const CheckoutDialog = (props) => {
             </div>
 
             <MDBModalBody className="pt-0 px-4 my-3">
-                Ini Checkout
+                <h4 className="h4-responsive">
+                    Checkout
+                </h4>
+
+                <hr/>
+
+                <select className="custom-select">
+                    {rekening.map((item, idx) => (
+                        <option key={idx} value={item}>
+                            {item.bank}
+                        </option>
+                    ))}
+                </select>
             </MDBModalBody>
-            
+
         </MDBModal>
     )
 }

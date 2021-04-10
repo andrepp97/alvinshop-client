@@ -55,7 +55,7 @@ const HomePage = () => {
 
                             <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
                                 <NavLink
-                                    to={`/catalog/${devices[0].id}`}
+                                    to={`/catalog/${devices ? devices[0].id : 0}`}
                                     className="w-responsive hover-up shadow"
                                 >
                                     <div className="card-body text-center">
@@ -77,7 +77,7 @@ const HomePage = () => {
 
                             <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
                                 <NavLink
-                                    to={`/catalog/${devices[1].id}`}
+                                    to={`/catalog/${devices ? devices[1].id : 0}`}
                                     className="w-responsive hover-up shadow"
                                 >
                                     <div className="card-body text-center">

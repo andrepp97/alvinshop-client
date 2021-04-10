@@ -1,4 +1,4 @@
-export const BASE_URL = "http://151.106.112.191:3000/";
+export const BASE_URL = "http://5.181.217.242:3000/";
 
 export const TOKEN_PREFIX = "@alvinshop/client";
 

@@ -40,7 +40,7 @@ const HomePage = () => {
             <div className="container h-100">
 
                 <h2 className="h2-responsive animation fadeInDown headline-text">
-                    WELCOME TO GAMING REVOLUTION
+                    WELCOME TO EVERA GAMING
                 </h2>
 
                 <MDBAnimation type="fadeIn" delay=".5s" className="container">

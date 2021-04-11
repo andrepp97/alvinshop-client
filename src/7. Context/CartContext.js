@@ -17,10 +17,7 @@ const CartContextProvider = (props) => {
     // CRUD
     const getUserCart = useCallback(() => {
         APIRequest.get('user/showCart')
-            .then(({ data }) => {
-                console.log('Cart Data', data)
-                setUserCart(data.data)
-            })
+            .then(({ data }) => setUserCart(data.data))
             .catch(err => console.log(err.response.data))
     }, [])
 

@@ -61,9 +61,11 @@ const AuthModal = ({ isOpen, toggleAuth }) => {
                         text: res.data.message,
                         icon: "error",
                     })
+                } else {
+                    console.log(err)
                 }
+                setLoading(false)
             })
-            .finally(() => setLoading(false))
         }
     }
 

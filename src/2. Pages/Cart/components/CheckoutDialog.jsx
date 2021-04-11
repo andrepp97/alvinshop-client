@@ -12,8 +12,8 @@ import BCA from '../../../3. Assets/img/bank/bca.png';
 import Mandiri from '../../../3. Assets/img/bank/mandiri.png';
 
 // Filepond
-import { FilePond, registerPlugin } from 'react-filepond'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import { FilePond, registerPlugin } from 'react-filepond';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 registerPlugin(FilePondPluginImagePreview)
 
 // Static

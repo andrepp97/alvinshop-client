@@ -7,6 +7,9 @@
 
 #btn-genre {
     min-width: 150px;
+    padding: 8px 16px;
+    margin-left: 0;
+    margin-right: 12px;
 }
 
 

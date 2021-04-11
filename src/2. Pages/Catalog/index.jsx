@@ -21,8 +21,8 @@ const Catalog = () => {
     const { key } = useParams()
 
     // STATE
-    const [recommended, setRecommended] = useState(null)
     const [offer, setOffer] = useState(null)
+    const [recommended, setRecommended] = useState(null)
     const [categories, setCategories] = useState([])
     const [genres, setGenres] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('')
@@ -37,6 +37,8 @@ const Catalog = () => {
             const { data } = res.data
             setCategories(data.category)
             setGenres(data.genre)
+            setSelectedCategory(data.category.length ? data.category[0].id : '')
+            setSelectedGenre(data.genre.length ? data.genre[0].id : '')
         } catch (err) {
             console.log('Error Filters', err)
         }
@@ -50,34 +52,31 @@ const Catalog = () => {
             }
             const res = await APIRequest.post('user/getProductByGenreAndCategory', body)
             const { data } = res.data
-            console.log('Hasil Filter', data)
             setProducts(data)
         } catch (err) {
             console.log('Error Product by Filters', err)
         }
     }, [selectedGenre, selectedCategory])
 
-    const getRecommended = async () => {
+    const getRecommended = useCallback(async () => {
         try {
-            const res = await APIRequest.get('user/recommendProduct')
-            // console.log('Recommended', res.data.data)
+            const res = await APIRequest.post('user/recommendProduct', { deviceId: key })
             const { data } = res.data
             setRecommended(data)
         } catch (err) {
             console.log('Error Recommended', err)
         }
-    }
+    }, [key])
 
-    const getOffer = async () => {
+    const getOffer = useCallback(async () => {
         try {
-            const res = await APIRequest.get('user/todayOffer')
-            // console.log('Todays Offer', res.data.data)
+            const res = await APIRequest.post('user/todayOffer', { deviceId: key })
             const { data } = res.data
             setOffer(data)
         } catch (err) {
             console.log('Error Today Offer', err)
         }
-    }
+    }, [key])
 
     // LIFECYCLE
     useEffect(() => {
@@ -91,7 +90,7 @@ const Catalog = () => {
     useEffect(() => {
         getOffer()
         getRecommended()
-    }, [])
+    }, [getOffer, getRecommended])
 
     // RENDER
     return (
@@ -106,7 +105,7 @@ const Catalog = () => {
                     {/* LEFT COLUMN */}
                     <div className="col-lg-3 mb-4 mb-lg-0">
                         <div className="sticky-top pt-4 pt-lg-5 mt-n3">
-                            <div>
+                            <div className="pt-3">
                                 <p className="font-weight-bold spacing-1 opacity-80">
                                     CATEGORY
                                 </p>
@@ -131,20 +130,23 @@ const Catalog = () => {
                     </div>
 
                     {/* RIGHT COLUMN */}
-                    <div className="col-lg-9 pt-4">
+                    <div className="col-lg-9 pt-5">
 
-                        <span className="text-uppercase font-weight-bolder spacing-2">
+                        <span className="text-uppercase font-weight-bolder border-bottom spacing-2">
                             Recommended
                         </span>
                         {recommended ? <Carousel data={recommended} /> : <Loader />}
 
-                        <span className="text-uppercase font-weight-bolder spacing-2">
+                        <span className="text-uppercase font-weight-bolder border-bottom spacing-2">
                             Today's Offer
                         </span>
                         {offer ? <Carousel data={offer} /> : <Loader />}
 
 
                         <div className="my-6">
+                            <span className="text-uppercase font-weight-bolder spacing-2">
+                                Products by Category & Genre
+                            </span>
                             <div
                                 id="genre-section"
                                 className="border-top border-bottom mb-3"
@@ -176,7 +178,9 @@ const Catalog = () => {
                                             ))
                                             : (
                                                 <div className="col">
-                                                    <p>No Result</p>
+                                                    <p className="opacity-60 my-3">
+                                                        No Result
+                                                    </p>
                                                 </div>
                                             )
                                         : <Loader />

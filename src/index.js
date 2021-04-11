@@ -9,10 +9,12 @@ import SettingsContextProvider from './7. Context/SettingsContext';
 
 // CSS
 import './3. Assets/css/index.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import 'react-multi-carousel/lib/styles.css';
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 
 ReactDOM.render(
   <React.StrictMode>

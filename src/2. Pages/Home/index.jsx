@@ -19,7 +19,7 @@ const HomePage = () => {
     const getDevices = useCallback(async () => {
         try {
             const res = await APIRequest.get('user/getDevice')
-            const {data} = res
+            const { data } = res
             setDevices(data.data)
         } catch (err) {
             console.log(err.response)
@@ -30,7 +30,7 @@ const HomePage = () => {
 
     // LIFECYCLE
     useEffect(() => {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         getDevices()
     }, [getDevices])
 
@@ -49,48 +49,48 @@ const HomePage = () => {
 
                 {
                     loading
-                    ? <Loader />
-                    : (
-                        <MDBAnimation type="fadeIn" className="row py-3">
+                        ? <Loader />
+                        : (
+                            <MDBAnimation type="fadeIn" className="row py-3">
 
-                            <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
-                                <NavLink
-                                    to={`/catalog/${devices ? devices[0].id : 0}`}
-                                    className="w-responsive hover-up shadow"
-                                >
-                                    <div className="card-body text-center">
-                                        <MDBIcon icon="desktop" size="4x" className="red-text" />
-                                    </div>
-                                    <div className="card-footer bg-danger text-white text-center">
-                                        {devices[0].name}
-                                    </div>
-                                </NavLink>
+                                <MDBAnimation type="slideInRight" className="col-md-4 d-flex align-items-center justify-content-center">
+                                    <NavLink
+                                        to={`/catalog/${devices && devices.length ? devices[0].id : 0}`}
+                                        className="w-responsive hover-up shadow"
+                                    >
+                                        <div className="card-body text-center">
+                                            <MDBIcon icon="desktop" size="4x" className="red-text" />
+                                        </div>
+                                        <div className="card-footer bg-danger text-white text-center">
+                                            {devices && devices.length ? devices[0].name : ''}
+                                        </div>
+                                    </NavLink>
+                                </MDBAnimation>
+
+                                <div id="logo-home" className="col-md-4" style={{ zIndex: 99 }}>
+                                    <img
+                                        className="img-fluid rounded"
+                                        alt={settings ? settings.name : ""}
+                                        src={settings ? BASE_URL + settingsPrefix + '/' + settings.icon_shop : ""}
+                                    />
+                                </div>
+
+                                <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
+                                    <NavLink
+                                        to={`/catalog/${devices && devices.length ? devices[1].id : 0}`}
+                                        className="w-responsive hover-up shadow"
+                                    >
+                                        <div className="card-body text-center">
+                                            <MDBIcon fab icon="playstation" size="4x" className="indigo-text" />
+                                        </div>
+                                        <div className="card-footer bg-primary text-white text-center">
+                                            {devices && devices.length ? devices[1].name : ''}
+                                        </div>
+                                    </NavLink>
+                                </MDBAnimation>
+
                             </MDBAnimation>
-
-                            <div id="logo-home" className="col-md-4" style={{ zIndex:99 }}>
-                                <img
-                                    className="img-fluid rounded"
-                                    alt={settings ? settings.name : ""}
-                                    src={settings ? BASE_URL + settingsPrefix + '/' + settings.icon_shop : ""}
-                                />
-                            </div>
-
-                            <MDBAnimation type="slideInLeft" className="col-md-4 mt-5 mt-md-0 d-flex align-items-center justify-content-center">
-                                <NavLink
-                                    to={`/catalog/${devices ? devices[1].id : 0}`}
-                                    className="w-responsive hover-up shadow"
-                                >
-                                    <div className="card-body text-center">
-                                        <MDBIcon fab icon="playstation" size="4x" className="indigo-text" />
-                                    </div>
-                                    <div className="card-footer bg-primary text-white text-center">
-                                        {devices[1].name}
-                                    </div>
-                                </NavLink>
-                            </MDBAnimation>
-
-                        </MDBAnimation>
-                    )
+                        )
                 }
 
             </div>

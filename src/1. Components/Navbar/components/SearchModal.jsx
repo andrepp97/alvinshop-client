@@ -24,9 +24,8 @@ const SearchModal = ({ isOpen, toggleSearch }) => {
                 }
             })
             const { data } = res
-            setResult(data.data)
 
-            console.log('Hasil Search', data)
+            setResult(data.data)
         } catch (err) {
             console.log(err.response)
         } finally {
@@ -78,7 +77,7 @@ const SearchModal = ({ isOpen, toggleSearch }) => {
                             : result
                                 ? result.length
                                     ? result.map(item => (
-                                        <div id={item.product_id} className="col-6">
+                                        <div key={item.product_id} className="col-6">
                                             <a
                                                 className="invisible-card"
                                                 href={`/product/${item.product_id}`}

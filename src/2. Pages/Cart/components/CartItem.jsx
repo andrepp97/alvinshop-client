@@ -27,7 +27,7 @@ const CartItem = ({ data, updateCart, deleteCart }) => {
                     id: data.product_id,
                 }
                 updateCart(body)
-            }, 1000)
+            }, 750)
             
             return () => clearTimeout(debounceFunction)
         }
